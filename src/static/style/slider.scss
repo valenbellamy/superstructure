@@ -1,0 +1,126 @@
+.slider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  .slider__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    .slider__item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease-out;
+      &.--on {
+        z-index: 0;
+        opacity: 1;
+        video,
+        h2,
+        .slider__progress {
+          display: block;
+        }
+      }
+      video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: none;
+      }
+      h2 {
+        position: relative;
+        display: none;
+      }
+    }
+  }
+}
+.slider__indicators {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 3;
+  &.--centered {
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+  li {
+    display: inline-block;
+    padding: 0rem 1rem;
+    cursor: pointer;
+    line-height: 1;
+    &:first-child {
+      padding-left: 0rem;
+    }
+    button {
+      vertical-align: middle;
+      font-size: 3rem;
+      line-height: 3rem;
+      color: white;
+      font-family: Helvetica;
+      cursor: pointer;
+      &:focus {
+        outline: 0;
+      }
+      //transition: color 0.4s ease-out;
+    }
+    &.--active {
+      button {
+        cursor: initial;
+        vertical-align: bottom;
+        font-size: 2rem;
+        line-height: 2rem;
+      }
+    }
+  }
+}
+
+.slider__progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  //display: none;
+  z-index: 3;
+  > div {
+    height: 5px;
+  }
+}
+
+.slider__controls {
+  position: fixed;
+  top: 50%;
+  z-index: 3;
+  margin-top: -15px;
+  cursor: pointer;
+  &:focus {
+    outline: 0;
+  }
+  svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+    //transition: fill 0.4s ease-out;
+  }
+  &.--prev {
+    left: 0.5rem;
+  }
+  &.--next {
+    right: 0.5rem;
+  }
+}

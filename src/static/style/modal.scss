@@ -1,0 +1,72 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: opacity 0.5s;
+  opacity: 0;
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  outline: 0;
+}
+
+.modal {
+  z-index: 2;
+  position: relative;
+  margin: 0rem auto;
+  width: auto;
+  height: 100vh;
+  overflow: hidden;
+  padding: 1rem;
+  p {
+    margin-top: 0.5rem;
+    font-family: Toren Mono;
+    font-size: 1.2rem;
+  }
+  .logo {
+    position: fixed;
+    bottom: 0px;
+    left: 1rem;
+    width: calc(100% - 2rem);
+    svg {
+      width: 100%;
+    }
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-close-button {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  z-index: 100;
+  background-color: transparent;
+  color: #000;
+  transition: color 0.3s;
+  &:hover {
+    color: #ccc;
+  }
+}

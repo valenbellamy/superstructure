@@ -1,0 +1,17 @@
+@font-face {
+  font-family: Helvetica;
+  font-weight: 400;
+  font-style: normal;
+  src: url("HelveticaNeueLTStd-Roman.woff") format("woff"),
+    url("HelveticaNeueLTStd-Roman.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Toren Mono;
+  font-weight: 400;
+  font-style: normal;
+  src: url("Toren-Mono.woff") format("woff"),
+    url("Toren-Mono.woff2") format("woff2");
+  font-display: swap;
+}
