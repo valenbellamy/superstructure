@@ -6,7 +6,6 @@ import SEO from "../components/seo"
 import Logo from "../components/logo"
 
 const ContactPage = ({ location }) => {
-  console.log(location.state.backUrl)
   return (
     <Layout>
       <SEO title="Contact" />
@@ -22,7 +21,9 @@ const ContactPage = ({ location }) => {
         >
           back
         </button> */}
-        <Link to={`${location.state.backUrl}`}>back</Link>
+        <Link to={`${location.state !== null ? location.state.backUrl : "/"}`}>
+          back
+        </Link>
         <div>
           <p>
             Pierre Grimaux et Jean Dathanat<br></br>11 rue Amelot, 75003 Paris -
