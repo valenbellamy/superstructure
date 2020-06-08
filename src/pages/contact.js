@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
@@ -6,6 +6,14 @@ import SEO from "../components/seo"
 import Logo from "../components/logo"
 
 const ContactPage = ({ location }) => {
+  const [backUrl, setBackUrl] = useState(null)
+  useEffect(() => {
+    if (location.state) {
+      setBackUrl(location.state.backUrl)
+    } else {
+      setBackUrl("/")
+    }
+  }, [])
   return (
     <Layout>
       <SEO title="Contact" />
@@ -21,9 +29,7 @@ const ContactPage = ({ location }) => {
         >
           back
         </button> */}
-        <Link to={`${location.state !== null ? location.state.backUrl : "/"}`}>
-          back
-        </Link>
+        <Link to={`${backUrl}`}>back</Link>
         <div>
           <p>
             Pierre Grimaux et Jean Dathanat<br></br>11 rue Amelot, 75003 Paris -

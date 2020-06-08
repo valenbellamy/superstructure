@@ -39,14 +39,14 @@ const ProjetPage = ({ location }) => {
   const dispatch = useGlobalDispatchContext()
 
   useEffect(() => {
-    if (currentIndex === null || currentColor === null) {
+    if (currentIndex === 1000 || currentColor === "#000") {
       dispatch({
         type: "CHANGE_COLOR",
         color: `${navRoutes[0].color}`,
         index: 0,
       })
     }
-  }, [])
+  }, [currentIndex, currentColor])
   return (
     <Layout>
       <SEO title="Projet" />
@@ -54,6 +54,7 @@ const ProjetPage = ({ location }) => {
         isShowingModal={isShowing}
         toggleModal={toggle}
         backUrl={location.pathname}
+        currentColor={currentColor}
       />
       <Slider
         slides={navRoutes}
@@ -69,7 +70,7 @@ const ProjetPage = ({ location }) => {
         toggleModal={toggle}
         currentColor={currentColor}
         content={
-          currentIndex === null
+          currentIndex === 1000
             ? navRoutes[0].title
             : navRoutes[currentIndex].title
         }

@@ -3,13 +3,13 @@ import PropTypes from "prop-types"
 import React from "react"
 
 //context
-import {
-  useGlobalDispatchContext,
-  useGlobalStateContext,
-} from "../context/globalContext"
+// import {
+//   useGlobalDispatchContext,
+//   useGlobalStateContext,
+// } from "../context/globalContext"
 
-const Header = ({ isShowingModal, toggleModal, backUrl }) => {
-  const { currentColor } = useGlobalStateContext()
+const Header = ({ isShowingModal, toggleModal, backUrl, currentColor }) => {
+  // const { currentColor } = useGlobalStateContext()
   return (
     <header>
       {!isShowingModal && (

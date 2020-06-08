@@ -57,16 +57,16 @@ const IndexPage = ({ location }) => {
   const { isShowing, toggle } = useModal()
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
-
+  //console.log({ currentColor, currentIndex })
   useEffect(() => {
-    if (currentIndex === null || currentColor === null) {
+    if (currentIndex === 1000 || currentColor === "#000") {
       dispatch({
         type: "CHANGE_COLOR",
         color: `${navRoutes[0].color}`,
         index: 0,
       })
     }
-  }, [])
+  }, [currentIndex, currentColor])
 
   return (
     <Layout>
@@ -75,6 +75,7 @@ const IndexPage = ({ location }) => {
         isShowingModal={isShowing}
         toggleModal={toggle}
         backUrl={location.pathname}
+        currentColor={currentColor}
       />
       <Slider
         slides={navRoutes}
@@ -90,7 +91,7 @@ const IndexPage = ({ location }) => {
         toggleModal={toggle}
         currentColor={currentColor}
         content={
-          currentIndex === null
+          currentIndex === 1000
             ? navRoutes[0].title
             : navRoutes[currentIndex].title
         }

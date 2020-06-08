@@ -1,6 +1,11 @@
 import React, { useReducer, useContext, createContext } from "react"
 
-const GlobalStateContext = createContext()
+const defaultState = {
+  currentColor: "#000",
+  currentIndex: 1000,
+}
+
+const GlobalStateContext = createContext(defaultState)
 const GlobalDispatchContext = createContext()
 
 const globalReducer = (state, action) => {
@@ -21,8 +26,8 @@ const globalReducer = (state, action) => {
 
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, {
-    currentColor: null,
-    currentIndex: null,
+    currentColor: "#000",
+    currentIndex: 1000,
     //backUrl: null,
     //backUrl: '/'
     // currentColor:
