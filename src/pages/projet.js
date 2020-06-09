@@ -19,14 +19,14 @@ import {
 const navRoutes = [
   {
     id: 0,
-    title: "not humble",
+    title: "Projet video 1",
     path: "/not-humble",
     video: "featured-video.mp4",
     color: "#00ff00",
   },
   {
     id: 1,
-    title: "it takes an island",
+    title: "Projet video 2",
     path: "/it-takes-an-island",
     video: "video.mp4",
     color: "#00ffff",
@@ -84,7 +84,13 @@ const ProjetPage = ({ location }) => {
           nextColor="#00ff00"
           isVisible={visible}
         />
-        <Nav currentColor={currentColor} nextSlug="" nextColor="#00ff00" />
+        <Nav
+          isShowingModal={isShowing}
+          currentColor={currentColor}
+          nextSlug=""
+          nextColor="#00ff00"
+          isVisible={visible}
+        />
         <Modal
           isShowingModal={isShowing}
           toggleModal={toggle}

@@ -58,6 +58,7 @@ const IndexPage = ({ location }) => {
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
   const [visible, setVisible] = useState(false)
+  const [move, setMove] = useState(false)
   //console.log({ currentColor, currentIndex })
   useEffect(() => {
     if (currentIndex === 1000 || currentColor === "#000") {
@@ -69,8 +70,43 @@ const IndexPage = ({ location }) => {
     }
   }, [currentIndex, currentColor])
 
-  const switchVisible = e => {
-    e.preventDefault()
+  // useEffect(() => {
+  //   console.log("ici")
+  //   if (move) {
+  //     setVisible(true)
+  //     const timer = setTimeout(() => {
+  //       setVisible(false)
+  //       setMove(false)
+  //     }, 3000)
+  //     return () => clearTimeout(timer)
+  //   }
+  // }, [move])
+
+  // useEffect(() => {
+
+  // }, [])
+
+  // var timeDelay = 0
+  // var timer = setInterval(delayCheck, 1000)
+
+  // const delayCheck = () => {
+  //   if (timeDelay == 3) {
+  //     setVisible(false)
+  //     timeDelay = 0
+  //   }
+  //   timeDelay += 1
+  // }
+
+  const switchVisible = () => {
+    //console.log("move")
+    //e.preventDefault()
+    // setVisible(true)
+    // timeDelay = 0
+    // clearInterval(timer)
+    // var timer = setInterval(delayCheck, 1000)
+    //return () => clearInterval(interval)
+    //setMove(true)
+
     if (!isShowing) {
       setVisible(true)
       const timer = setTimeout(() => {
@@ -78,15 +114,31 @@ const IndexPage = ({ location }) => {
       }, 3000)
       return () => clearTimeout(timer)
     }
+    //console.log("bouge")
+    // let interval
+    // let time = 0
+    // if (!isShowing) {
+    //   setVisible(true)
+    //   let interval = setInterval(() => {
+    //     time += 1
+    //     //console.log(time)
+    //   }, 1000)
+    // }
+    // if (time == 3) {
+    //   clearInterval(interval)
+    //   setVisible(false)
+    //   time = 0
+    // }
+    // return () => clearInterval(interval)
   }
 
   return (
     <Layout>
       <SEO title="Home" />
       <div
-        onMouseMove={e => {
-          e.persist()
-          switchVisible(e)
+        onMouseMove={() => {
+          //e.persist()
+          switchVisible()
         }}
       >
         <Header
