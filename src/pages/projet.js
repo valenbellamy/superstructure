@@ -49,60 +49,61 @@ const ProjetPage = ({ location }) => {
     }
   }, [currentIndex, currentColor])
 
-  const switchVisible = e => {
-    e.preventDefault()
-    if (!isShowing) {
-      setVisible(true)
-      const timer = setTimeout(() => {
-        setVisible(false)
-      }, 3000)
-      return () => clearTimeout(timer)
-    }
+  let timer = null
+
+  const handleMouseMove = () => {
+    setVisible(true)
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      setVisible(false)
+    }, 3000)
   }
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove)
+      if (timer) clearTimeout(timer)
+    }
+  }, [])
+
   return (
     <Layout>
       <SEO title="Projet" />
-      <div
-        onMouseMove={e => {
-          e.persist()
-          switchVisible(e)
-        }}
-      >
-        <Header
-          isShowingModal={isShowing}
-          toggleModal={toggle}
-          backUrl={location.pathname}
-          currentColor={currentColor}
-          isVisible={visible}
-        />
-        <Slider
-          slides={navRoutes}
-          isShowingModal={isShowing}
-          currentColor={currentColor}
-          currentIndex={currentIndex}
-          nextSlug=""
-          nextColor="#00ff00"
-          isVisible={visible}
-        />
-        <Nav
-          isShowingModal={isShowing}
-          currentColor={currentColor}
-          nextSlug=""
-          nextColor="#00ff00"
-          isVisible={visible}
-        />
-        <Modal
-          isShowingModal={isShowing}
-          toggleModal={toggle}
-          currentColor={currentColor}
-          content={
-            currentIndex === 1000
-              ? navRoutes[0].title
-              : navRoutes[currentIndex].title
-          }
-          backUrl={location.pathname}
-        />
-      </div>
+      <Header
+        isShowingModal={isShowing}
+        toggleModal={toggle}
+        backUrl={location.pathname}
+        currentColor={currentColor}
+        isVisible={visible}
+      />
+      <Slider
+        slides={navRoutes}
+        isShowingModal={isShowing}
+        currentColor={currentColor}
+        currentIndex={currentIndex}
+        nextSlug=""
+        nextColor="#00ff00"
+        isVisible={visible}
+      />
+      <Nav
+        isShowingModal={isShowing}
+        currentColor={currentColor}
+        nextSlug=""
+        nextColor="#00ff00"
+        isVisible={visible}
+      />
+      <Modal
+        isShowingModal={isShowing}
+        toggleModal={toggle}
+        currentColor={currentColor}
+        content={
+          currentIndex === 1000
+            ? navRoutes[0].title
+            : navRoutes[currentIndex].title
+        }
+        backUrl={location.pathname}
+      />
     </Layout>
   )
 }
