@@ -56,6 +56,7 @@ const Video = ({
         playsInline
         //loop
         muted
+        preload="auto"
         // poster={poster ? poster.file.url : placeholder}
         ref={videoEl}
       >

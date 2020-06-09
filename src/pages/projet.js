@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
@@ -37,6 +37,7 @@ const ProjetPage = ({ location }) => {
   const { isShowing, toggle } = useModal()
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     if (currentIndex === 1000 || currentColor === "#000") {
@@ -47,35 +48,55 @@ const ProjetPage = ({ location }) => {
       })
     }
   }, [currentIndex, currentColor])
+
+  const switchVisible = e => {
+    e.preventDefault()
+    if (!isShowing) {
+      setVisible(true)
+      const timer = setTimeout(() => {
+        setVisible(false)
+      }, 3000)
+      return () => clearTimeout(timer)
+    }
+  }
   return (
     <Layout>
       <SEO title="Projet" />
-      <Header
-        isShowingModal={isShowing}
-        toggleModal={toggle}
-        backUrl={location.pathname}
-        currentColor={currentColor}
-      />
-      <Slider
-        slides={navRoutes}
-        isShowingModal={isShowing}
-        currentColor={currentColor}
-        currentIndex={currentIndex}
-        nextSlug=""
-        nextColor="#00ff00"
-      />
-      <Nav currentColor={currentColor} nextSlug="" nextColor="#00ff00" />
-      <Modal
-        isShowingModal={isShowing}
-        toggleModal={toggle}
-        currentColor={currentColor}
-        content={
-          currentIndex === 1000
-            ? navRoutes[0].title
-            : navRoutes[currentIndex].title
-        }
-        backUrl={location.pathname}
-      />
+      <div
+        onMouseMove={e => {
+          e.persist()
+          switchVisible(e)
+        }}
+      >
+        <Header
+          isShowingModal={isShowing}
+          toggleModal={toggle}
+          backUrl={location.pathname}
+          currentColor={currentColor}
+          isVisible={visible}
+        />
+        <Slider
+          slides={navRoutes}
+          isShowingModal={isShowing}
+          currentColor={currentColor}
+          currentIndex={currentIndex}
+          nextSlug=""
+          nextColor="#00ff00"
+          isVisible={visible}
+        />
+        <Nav currentColor={currentColor} nextSlug="" nextColor="#00ff00" />
+        <Modal
+          isShowingModal={isShowing}
+          toggleModal={toggle}
+          currentColor={currentColor}
+          content={
+            currentIndex === 1000
+              ? navRoutes[0].title
+              : navRoutes[currentIndex].title
+          }
+          backUrl={location.pathname}
+        />
+      </div>
     </Layout>
   )
 }

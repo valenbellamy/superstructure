@@ -7,7 +7,13 @@ import {
   useGlobalStateContext,
 } from "../context/globalContext"
 
-const Nav = ({ currentColor, nextSlug, nextColor }) => {
+const Nav = ({
+  isShowingModal,
+  currentColor,
+  nextSlug,
+  nextColor,
+  isVisible,
+}) => {
   //const { currentColor } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
 
@@ -19,6 +25,15 @@ const Nav = ({ currentColor, nextSlug, nextColor }) => {
     })
     navigate(`${nextSlug}`)
   }
+
+  const navClasses = () => {
+    if (!isVisible && !isShowingModal) {
+      return "--hidden"
+    } else {
+      return ""
+    }
+  }
+
   return (
     <>
       {/* <button type="button" className="slider__controls --prev">
@@ -34,7 +49,7 @@ const Nav = ({ currentColor, nextSlug, nextColor }) => {
       </button> */}
       <button
         type="button"
-        className="slider__controls --next"
+        className={`slider__controls --next ${navClasses()}`}
         onClick={nextProject}
       >
         <svg viewBox="0 0 187 374">

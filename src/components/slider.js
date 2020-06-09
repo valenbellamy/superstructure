@@ -16,6 +16,7 @@ const Slider = ({
   currentIndex,
   nextSlug,
   nextColor,
+  isVisible,
 }) => {
   const limit = slides.length
   const dispatch = useGlobalDispatchContext()
@@ -50,6 +51,18 @@ const Slider = ({
     setPercentage(value)
   }
 
+  const indicatorsClasses = () => {
+    if (isShowingModal) {
+      return "--centered"
+    } else {
+      if (isVisible) {
+        return ""
+      } else {
+        return "--hidden"
+      }
+    }
+  }
+
   return (
     <>
       <section className="slider">
@@ -67,14 +80,19 @@ const Slider = ({
                 currentPercentage={setCurrentPercentage}
               />
               {!isShowingModal && (
-                <h2 style={{ color: currentColor }}>{route.title}</h2>
+                <h2 style={{ color: currentColor, opacity: isVisible ? 1 : 0 }}>
+                  {route.title}
+                </h2>
               )}
             </div>
           ))}
         </div>
       </section>
       <ol
-        className={`slider__indicators ${isShowingModal ? "--centered" : ""}`}
+        // className={`slider__indicators ${
+        //   isShowingModal ? "--centered" : ""
+        // } `}
+        className={`slider__indicators ${indicatorsClasses()} `}
       >
         {slides.map((route, i) => (
           <li

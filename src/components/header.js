@@ -8,12 +8,18 @@ import React from "react"
 //   useGlobalStateContext,
 // } from "../context/globalContext"
 
-const Header = ({ isShowingModal, toggleModal, backUrl, currentColor }) => {
+const Header = ({
+  isShowingModal,
+  toggleModal,
+  backUrl,
+  currentColor,
+  isVisible,
+}) => {
   // const { currentColor } = useGlobalStateContext()
   return (
     <header>
       {!isShowingModal && (
-        <nav>
+        <nav className={`${isVisible ? "" : "--hidden"}`}>
           <button
             onClick={toggleModal}
             type="button"
