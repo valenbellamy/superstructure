@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import Video from "./video"
 import { navigate } from "gatsby"
 import ProgressBar from "./progressBar"
+import Img from "gatsby-image"
+import { useStaticQuery, graphql } from "gatsby"
 
 //context
 import {
@@ -18,6 +20,17 @@ const Slider = ({
   nextColor,
   isVisible,
 }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      file(relativePath: { eq: "TUPREFERE.png" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
   const limit = slides.length
   const dispatch = useGlobalDispatchContext()
   const [percentage, setPercentage] = useState(0)
@@ -80,9 +93,13 @@ const Slider = ({
                 currentPercentage={setCurrentPercentage}
               />
               {!isShowingModal && (
-                <h2 style={{ color: currentColor, opacity: isVisible ? 1 : 0 }}>
-                  {route.title}
-                </h2>
+                <div
+                  className="slider__item__content"
+                  style={{ opacity: isVisible ? 1 : 0 }}
+                >
+                  {/* <h2 style={{ color: currentColor }}>{route.title}</h2> */}
+                  <Img fluid={data.file.childImageSharp.fluid} />
+                </div>
               )}
             </div>
           ))}

@@ -18,9 +18,7 @@ const ContactPage = ({ location }) => {
     <Layout>
       <SEO title="Contact" />
       <section className="contact">
-        <div className="logo">
-          <Logo currentColor="#000" />
-        </div>
+        <Logo currentColor="#000" />
         {/* <button
           type="button"
           onClick={() => {

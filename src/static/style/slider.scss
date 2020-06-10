@@ -39,16 +39,27 @@
         object-position: center;
         display: none;
       }
-      h2 {
-        position: relative;
+      .slider__item__content {
         transition: opacity 0.3s ease;
+        width: 30vw;
+        // .gatsby-image-wrapper {
+
+        // }
       }
+      // h2 {
+      //   position: relative;
+      //   transition: opacity 0.3s ease;
+      // }
+      // .logo__project {
+      //   width: 300px;
+      //   transition: opacity 0.3s ease;
+      // }
     }
   }
 }
 .slider__indicators {
   position: fixed;
-  bottom: 1rem;
+  bottom: calc(#{$main-padding} * 0.7);
   left: 1rem;
   z-index: 3;
   opacity: 1;
@@ -128,14 +139,14 @@
     //transition: fill 0.4s ease-out;
   }
   &.--prev {
-    left: 0.5rem;
+    left: calc(#{$main-padding} * 0.8);
     &.--hidden {
       opacity: 0;
       transform: translate(-100px, 0px);
     }
   }
   &.--next {
-    right: 0.5rem;
+    right: calc(#{$main-padding} * 0.8);
     &.--hidden {
       opacity: 0;
       transform: translate(100px, 0px);

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 import Slider from "../components/slider"
 import Nav from "../components/nav"
@@ -33,7 +32,7 @@ const navRoutes = [
   },
 ]
 
-const ProjetPage = ({ location }) => {
+const ProjetPage = ({ location, data }) => {
   const { isShowing, toggle } = useModal()
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
@@ -103,9 +102,22 @@ const ProjetPage = ({ location }) => {
             : navRoutes[currentIndex].title
         }
         backUrl={location.pathname}
+        imgTest={data.file.childImageSharp.fluid}
       />
     </Layout>
   )
 }
+
+export const query = graphql`
+  query {
+    file(relativePath: { eq: "Canal-logo-logotype-1024x768-bleu.png" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
 
 export default ProjetPage

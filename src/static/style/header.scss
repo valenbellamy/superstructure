@@ -1,13 +1,13 @@
 header {
   position: fixed;
-  top: 1rem;
+  top: calc(#{$main-padding} * 0.7);
   left: 0;
   width: 100%;
   z-index: 3;
   nav {
     display: flex;
     justify-content: space-between;
-    padding: 0rem 1rem;
+    padding: 0rem $main-padding;
     opacity: 1;
     transform: translate(0px, 0px);
     transition: all 0.3s ease;

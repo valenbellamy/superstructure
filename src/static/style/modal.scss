@@ -31,17 +31,38 @@
   width: auto;
   height: 100vh;
   overflow: hidden;
-  padding: 1rem;
+  padding: calc(#{$main-padding} * 0.7) $main-padding $main-padding
+    $main-padding;
+  display: flex;
+  justify-content: space-between;
   p {
     margin-top: 0.5rem;
+    margin-bottom: 1rem;
     font-family: Toren Mono;
     font-size: 1.2rem;
+  }
+  .content {
+    width: 60%;
+  }
+  .logos {
+    margin-left: auto;
+    .gatsby-image-wrapper {
+      margin-bottom: 1rem;
+    }
+  }
+  .content,
+  .logos {
+    .gatsby-image-wrapper {
+      width: 200px;
+    }
   }
   .logo {
     position: fixed;
     bottom: 0px;
-    left: 1rem;
-    width: calc(100% - 2rem);
+    left: 0rem;
+    width: 100%;
+    padding: 0rem $main-padding;
+    //width: calc(100% - 2rem);
     svg {
       width: 100%;
     }

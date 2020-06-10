@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -53,7 +53,7 @@ const navRoutes = [
   },
 ]
 
-const IndexPage = ({ location }) => {
+const IndexPage = ({ location, data }) => {
   const { isShowing, toggle } = useModal()
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
@@ -123,11 +123,24 @@ const IndexPage = ({ location }) => {
             ? navRoutes[0].title
             : navRoutes[currentIndex].title
         }
+        imgTest={data.file.childImageSharp.fluid}
         backUrl={location.pathname}
         //content="test"
       />
     </Layout>
   )
 }
+
+export const query = graphql`
+  query {
+    file(relativePath: { eq: "Canal-logo-logotype-1024x768-bleu.png" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage

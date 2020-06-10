@@ -10,6 +10,7 @@ const Modal = ({
   content,
   currentColor,
   backUrl,
+  imgTest,
 }) => {
   return (
     <>
@@ -25,7 +26,7 @@ const Modal = ({
             onClick={toggleModal}
           >
             <div className="modal">
-              <div>
+              <div className="content">
                 <h1 style={{ color: currentColor }}>{content}</h1>
                 <p style={{ color: currentColor }}>
                   Sed porta odio at libero consectetur commodo. Suspendisse quis
@@ -34,6 +35,11 @@ const Modal = ({
                   libero eu, sollicitudin porttitor ipsum. Curabitur in urna a
                   dolor lobortis hendrerit sed ut metus.
                 </p>
+                <Img fluid={imgTest} />
+              </div>
+              <div className="logos">
+                <Img fluid={imgTest} />
+                <Img fluid={imgTest} />
               </div>
               <Link to="/contact" state={{ backUrl: backUrl }}>
                 <Logo currentColor={currentColor} />
