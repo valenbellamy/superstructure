@@ -60,7 +60,7 @@
 .slider__indicators {
   position: fixed;
   bottom: calc(#{$main-padding} * 0.7);
-  left: 1rem;
+  left: $main-padding;
   z-index: 3;
   opacity: 1;
   transition: opacity 0.3s ease, transform 0.3s ease;
