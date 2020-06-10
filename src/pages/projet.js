@@ -37,7 +37,7 @@ const ProjetPage = ({ location }) => {
   const { isShowing, toggle } = useModal()
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
     if (currentIndex === 1000 || currentColor === "#000") {
