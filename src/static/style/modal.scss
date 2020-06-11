@@ -1,93 +1,104 @@
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
-  transition: opacity 0.5s;
-  opacity: 0;
-  &.visible {
-    opacity: 1;
-  }
-}
-
-.modal-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  outline: 0;
-}
-
 .modal {
-  z-index: 2;
-  position: relative;
-  margin: 0rem auto;
-  width: auto;
-  height: 100vh;
-  overflow: hidden;
-  padding: calc(#{$main-padding} * 0.7) $main-padding $main-padding
-    $main-padding;
-  display: flex;
-  justify-content: space-between;
-  p {
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    font-family: Toren Mono;
-    font-size: 1.2rem;
+  &.--transition {
+    .modal__overlay {
+      background-color: rgba(255, 255, 255, 1);
+      transition: all 1s ease;
+    }
   }
-  .content {
-    width: 60%;
+  .modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: opacity 0.5s;
+    opacity: 0;
+    &.visible {
+      opacity: 1;
+    }
   }
-  .logos {
-    margin-left: auto;
-    .gatsby-image-wrapper {
+
+  .modal__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    outline: 0;
+  }
+
+  .modal__content {
+    z-index: 2;
+    position: relative;
+    margin: 0rem auto;
+    width: auto;
+    height: 100vh;
+    overflow: hidden;
+    padding: calc(#{$main-padding} * 0.7) $main-padding $main-padding
+      $main-padding;
+    display: flex;
+    justify-content: space-between;
+    p {
+      margin-top: 0.5rem;
       margin-bottom: 1rem;
+      font-family: Toren Mono;
+      font-size: 1.2rem;
+    }
+    .content {
+      width: 60%;
+    }
+    .logos {
+      margin-left: auto;
+      .gatsby-image-wrapper {
+        margin-bottom: 1rem;
+      }
+    }
+    .content,
+    .logos {
+      .gatsby-image-wrapper {
+        width: 200px;
+      }
     }
   }
-  .content,
-  .logos {
-    .gatsby-image-wrapper {
-      width: 200px;
-    }
+}
+
+.logo__wrapper {
+  position: fixed;
+  z-index: 3;
+  top: 100%;
+  transform: translate(0%, -100%);
+  left: 0rem;
+  width: 100%;
+  padding: 0rem $main-padding;
+  transition: all 1s ease;
+  &.--transition {
+    top: 0px;
+    transform: translate(0%, 0%);
   }
   .logo {
-    position: fixed;
-    bottom: 0px;
-    left: 0rem;
-    width: 100%;
-    padding: 0rem $main-padding;
-    //width: calc(100% - 2rem);
     svg {
       width: 100%;
     }
   }
 }
 
-.modal-header {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.modal-close-button {
+.transition__wrapper {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 1;
-  cursor: pointer;
-  border: none;
-  z-index: 100;
-  background-color: transparent;
-  color: #000;
-  transition: color 0.3s;
-  &:hover {
-    color: #ccc;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0;
+  position: fixed;
+  z-index: 2;
+  &.--transition {
+    z-index: 3;
+    opacity: 1;
+    transition: opacity 0.6s ease;
   }
 }
