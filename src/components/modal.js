@@ -1,54 +1,17 @@
-import React, { useEffect, useRef } from "react"
+import React, { useState } from "react"
 import ReactDOM from "react-dom"
 import Img from "gatsby-image"
 import Logo from "./logo"
 import { Link } from "gatsby"
 import TransitionLink from "gatsby-plugin-transition-link"
 import { TransitionState } from "gatsby-plugin-transition-link"
-import posed from "react-pose"
 
 const TRANSITION_LENGTH = 1
-
-// const LogoWrapper = posed.div({
-//   exiting: {
-//     y: ({ element }) => {
-//       const distanceToTop = element.getBoundingClientRect().top
-//       console.log(distanceToTop)
-//       return distanceToTop * -1
-//     },
-//     transition: {
-//       ease: [0.59, 0.01, 0.28, 1],
-//       delay: 250,
-//       duration: TRANSITION_LENGTH * 1000 - 250,
-//     },
-//   },
-// })
-
-const getTransitionStyles = {
-  // entering: {
-  //   position: `absolute`,
-  //   opacity: 0,
-  // },
-  // entered: {
-  //   transition: `opacity ${TRANSITION_LENGTH}ms ease-in-out`,
-  //   opacity: 1,
-  // },
-  exiting: {
-    transition: `all ${TRANSITION_LENGTH}s ease-in-out`,
-    //opacity: 0,
-    top: `0%`,
-    //transform: `translate(0%, -500px)`,
-  },
-}
-
-const FadingContent = posed.div({
-  exiting: { opacity: 0 },
-})
 
 const exitTransition = {
   length: TRANSITION_LENGTH,
   trigger: () => {
-    console.log("We are exiting")
+    console.log("exit")
     if (document) {
       document.body.style.overflow = "hidden"
     }
@@ -58,7 +21,7 @@ const exitTransition = {
 const entryTransition = {
   delay: TRANSITION_LENGTH,
   trigger: () => {
-    console.log("We are entering")
+    console.log("enter")
     if (document && window) {
       window.scrollTo(0, 0)
       document.body.style.overflow = "visible"
@@ -74,6 +37,7 @@ const Modal = ({
   backUrl,
   imgTest,
 }) => {
+  const [transition, setTransition] = useState(false)
   return (
     <TransitionState>
       {({ transitionStatus }) => (
@@ -116,7 +80,7 @@ const Modal = ({
               </div>
               <div
                 className={`transition__wrapper ${
-                  transitionStatus === "exiting" ? "--transition" : ""
+                  transition ? "--transition" : ""
                 }`}
                 onClick={toggleModal}
               ></div>
@@ -125,18 +89,17 @@ const Modal = ({
                 exit={exitTransition}
                 entry={entryTransition}
                 state={{ backUrl: backUrl }}
+                onClick={() => {
+                  setTransition(true)
+                }}
               >
                 <div
                   className="logo__wrapper"
                   className={`logo__wrapper ${
-                    transitionStatus === "exiting" ? "--transition" : ""
+                    transition ? "--transition" : ""
                   }`}
                 >
-                  <Logo
-                    currentColor={
-                      transitionStatus === "exiting" ? "#000000" : currentColor
-                    }
-                  />
+                  <Logo currentColor={transition ? "#000000" : currentColor} />
                 </div>
               </TransitionLink>
             </>

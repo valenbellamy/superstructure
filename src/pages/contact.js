@@ -4,31 +4,37 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Logo from "../components/logo"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 const ContactPage = ({ location }) => {
   const [backUrl, setBackUrl] = useState(null)
+  const [active, setActive] = useState(false)
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setActive(true)
+    }, 10)
+
     if (location.state) {
       setBackUrl(location.state.backUrl)
     } else {
       setBackUrl("/")
     }
+    return () => clearTimeout(timer)
   }, [])
   return (
     <Layout>
       <SEO title="Contact" />
-      <section className="contact">
+      <section className={`contact ${active ? "--active" : ""}`}>
         <Logo currentColor="#000" />
-        {/* <button
-          type="button"
-          onClick={() => {
-            typeof history !== "undefined" && history.go(-1)
-          }}
+        <AniLink
+          fade
+          //to="/"
+          to={`${backUrl}`}
+          className="link"
         >
           back
-        </button> */}
-        <Link to={`${backUrl}`}>back</Link>
-        <div>
+        </AniLink>
+        <div className="info">
           <p>
             Pierre Grimaux et Jean Dathanat<br></br>11 rue Amelot, 75003 Paris -
             France <br></br>contact@superstructure.tv

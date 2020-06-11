@@ -20,36 +20,15 @@ const navRoutes = [
     id: 0,
     title: "not humble",
     path: "/not-humble",
-    video: "featured-video.mp4",
-    color: "#00ff00",
+    video: "50-beaches.mp4",
+    color: "#FFB27B",
   },
   {
     id: 1,
     title: "bleeping easy",
     path: "/bleeping-easy",
-    video: "video.mp4",
+    video: "easy.mp4",
     color: "#0000ff",
-  },
-  {
-    id: 2,
-    title: "make it zero",
-    path: "/make-it-zero",
-    video: "featured-video.mp4",
-    color: "#ff0000",
-  },
-  {
-    id: 3,
-    title: "it takes an island",
-    path: "/it-takes-an-island",
-    video: "video.mp4",
-    color: "#00ffff",
-  },
-  {
-    id: 4,
-    title: "50 beaches",
-    path: "/50-beaches",
-    video: "featured-video.mp4",
-    color: "#ff00ff",
   },
 ]
 
@@ -58,6 +37,7 @@ const IndexPage = ({ location, data }) => {
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
   const [visible, setVisible] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     if (currentIndex === 1000 || currentColor === "#000") {
@@ -80,6 +60,13 @@ const IndexPage = ({ location, data }) => {
   }
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setMounted(true)
+    }, 10)
+    return () => clearTimeout(timer)
+  })
+
+  useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove)
     return () => {
       window.removeEventListener("mousemove", handleMouseMove)
@@ -91,42 +78,48 @@ const IndexPage = ({ location, data }) => {
     <Layout>
       <SEO title="Home" />
 
-      <Header
-        isShowingModal={isShowing}
-        toggleModal={toggle}
-        backUrl={location.pathname}
-        currentColor={currentColor}
-        isVisible={visible}
-      />
-      <Slider
-        slides={navRoutes}
-        isShowingModal={isShowing}
-        currentColor={currentColor}
-        currentIndex={currentIndex}
-        nextSlug="projet"
-        nextColor="#00ff00"
-        isVisible={visible}
-      />
-      <Nav
-        isShowingModal={isShowing}
-        currentColor={currentColor}
-        nextSlug="projet"
-        nextColor="#00ff00"
-        isVisible={visible}
-      />
-      <Modal
-        isShowingModal={isShowing}
-        toggleModal={toggle}
-        currentColor={currentColor}
-        content={
-          currentIndex === 1000
-            ? navRoutes[0].title
-            : navRoutes[currentIndex].title
-        }
-        imgTest={data.file.childImageSharp.fluid}
-        backUrl={location.pathname}
-        //content="test"
-      />
+      <div
+      // style={{ opacity: mounted ? 1 : 0, transition: `opacity 0.3s` }}
+      >
+        <Header
+          isShowingModal={isShowing}
+          toggleModal={toggle}
+          backUrl={location.pathname}
+          currentColor={currentColor}
+          isVisible={visible}
+        />
+        <Slider
+          slides={navRoutes}
+          isShowingModal={isShowing}
+          currentColor={currentColor}
+          currentIndex={currentIndex}
+          nextSlug="projet"
+          nextColor="#00ff00"
+          isVisible={visible}
+          toggleModal={toggle}
+        />
+        <Nav
+          isShowingModal={isShowing}
+          currentColor={currentColor}
+          nextSlug="projet"
+          nextColor="#00ff00"
+          isVisible={visible}
+          toggleModal={toggle}
+        />
+        <Modal
+          isShowingModal={isShowing}
+          toggleModal={toggle}
+          currentColor={currentColor}
+          content={
+            currentIndex === 1000
+              ? navRoutes[0].title
+              : navRoutes[currentIndex].title
+          }
+          imgTest={data.file.childImageSharp.fluid}
+          backUrl={location.pathname}
+          //content="test"
+        />
+      </div>
     </Layout>
   )
 }

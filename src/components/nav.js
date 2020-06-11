@@ -1,5 +1,6 @@
 import React from "react"
-import { navigate } from "gatsby"
+import { navigate, Link } from "gatsby"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 //context
 import {
@@ -13,11 +14,14 @@ const Nav = ({
   nextSlug,
   nextColor,
   isVisible,
+  toggleModal,
 }) => {
   //const { currentColor } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
 
   const nextProject = () => {
+    console.log("dispatch")
+    toggleModal()
     dispatch({
       type: "CHANGE_COLOR",
       color: `${nextColor}`,
@@ -62,6 +66,23 @@ const Nav = ({
           </g>
         </svg>
       </button>
+      {/* <AniLink
+        fade
+        duration={1}
+        className={`slider__controls --next ${navClasses()}`}
+        onClick={nextProject}
+        to={`${nextSlug}`}
+      >
+        <svg viewBox="0 0 187 374">
+          <polygon points="605,1231.6 605,1204.4 591.4,1218 " />
+          <g>
+            <polygon
+              fill={currentColor}
+              points="121,187 -0.1,308.1 -0.1,374.1 187,187 -0.1,-0.1 -0.1,65.8 	"
+            />
+          </g>
+        </svg>
+      </AniLink> */}
     </>
   )
 }

@@ -19,10 +19,11 @@ const Slider = ({
   nextSlug,
   nextColor,
   isVisible,
+  toggleModal,
 }) => {
   const data = useStaticQuery(graphql`
     query {
-      file(relativePath: { eq: "TUPREFERE.png" }) {
+      file(relativePath: { eq: "logo-test.png" }) {
         childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid
@@ -47,6 +48,10 @@ const Slider = ({
         index: 0,
       })
       navigate(`${nextSlug}`)
+      if (isShowingModal) {
+        toggleModal()
+      }
+      return
     } else {
       changeLocalStorage(currentIndex + 1)
     }
