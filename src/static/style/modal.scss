@@ -42,25 +42,50 @@
       $main-padding;
     display: flex;
     justify-content: space-between;
+    @media (max-width: 767.98px) {
+      padding: 1.5rem 2rem 2rem 2rem;
+    }
+    @media (max-width: 575.98px) {
+      flex-direction: column;
+      padding: 1.5rem 2rem 12rem 2rem;
+    }
     p {
       margin-top: 0.5rem;
       margin-bottom: 1rem;
       font-family: Toren Mono;
       font-size: 1.4rem;
+      @media (max-width: 767.98px) {
+        font-size: 1.2rem;
+      }
     }
     .content {
       width: 60%;
+      @media (max-width: 767.98px) {
+        width: 70%;
+      }
+      @media (max-width: 575.98px) {
+        width: 100%;
+      }
     }
     .logos {
       margin-left: auto;
       .gatsby-image-wrapper {
         margin-bottom: 1rem;
+        @media (max-width: 767.98px) {
+          margin-bottom: 0.5rem;
+        }
+      }
+      @media (max-width: 767.98px) {
+        margin-left: 0;
       }
     }
     .content,
     .logos {
       .gatsby-image-wrapper {
         width: 200px;
+        @media (max-width: 767.98px) {
+          width: 120px;
+        }
       }
     }
   }
@@ -75,9 +100,16 @@
   width: 100%;
   padding: 0rem $main-padding;
   transition: all 1s cubic-bezier(0.69, 0, 0.28, 1);
+  @media (max-width: 767.98px) {
+    top: calc(100% - 2rem);
+    padding: 0 2rem;
+  }
   &.--transition {
     top: 0px;
     transform: translate(0%, 0%);
+    @media (max-width: 767.98px) {
+      top: 2rem;
+    }
   }
   .logo {
     svg {
