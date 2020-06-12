@@ -35,6 +35,7 @@ const Slider = ({
   const limit = slides.length
   const dispatch = useGlobalDispatchContext()
   const [percentage, setPercentage] = useState(0)
+  const [isHidden, setIsHidden] = useState(false)
 
   const indexClick = i => {
     changeLocalStorage(i)
@@ -45,13 +46,13 @@ const Slider = ({
       if (isShowingModal) {
         toggleModal()
       }
+      setIsHidden(true)
       navigate(`${nextSlug}`)
       dispatch({
         type: "CHANGE_COLOR",
         color: `${nextColor}`,
         index: 0,
       })
-      return
     } else {
       changeLocalStorage(currentIndex + 1)
     }
@@ -83,53 +84,52 @@ const Slider = ({
 
   return (
     <>
-      <section className="slider">
-        <div className="slider__container">
-          {slides.map((route, i) => (
-            <div
-              className={`slider__item ${currentIndex === i ? "--on" : ""}`}
-              key={route.id}
-            >
-              <Video
-                source={route.video}
-                currentSlide={currentIndex}
-                position={i}
-                increment={increment}
-                currentPercentage={setCurrentPercentage}
-                limit={limit}
-              />
-              {!isShowingModal && (
+      {!isHidden && (
+        <>
+          <section className="slider">
+            <div className="slider__container">
+              {slides.map((route, i) => (
                 <div
-                  className="slider__item__content"
-                  style={{ opacity: isVisible ? 1 : 0 }}
+                  className={`slider__item ${currentIndex === i ? "--on" : ""}`}
+                  key={route.id}
                 >
-                  {/* <h2 style={{ color: currentColor }}>{route.title}</h2> */}
-                  <Img fluid={data.file.childImageSharp.fluid} />
+                  <Video
+                    source={route.video}
+                    currentSlide={currentIndex}
+                    position={i}
+                    increment={increment}
+                    currentPercentage={setCurrentPercentage}
+                    limit={limit}
+                  />
+                  {!isShowingModal && (
+                    <div
+                      className="slider__item__content"
+                      style={{ opacity: isVisible ? 1 : 0 }}
+                    >
+                      {/* <h2 style={{ color: currentColor }}>{route.title}</h2> */}
+                      <Img fluid={data.file.childImageSharp.fluid} />
+                    </div>
+                  )}
                 </div>
-              )}
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
-      <ol
-        // className={`slider__indicators ${
-        //   isShowingModal ? "--centered" : ""
-        // } `}
-        className={`slider__indicators ${indicatorsClasses()} `}
-      >
-        {slides.map((route, i) => (
-          <li
-            className={currentIndex === i ? "--active" : ""}
-            key={route.id}
-            onClick={() => indexClick(i)}
-          >
-            <button type="button" style={{ color: currentColor }}>
-              {route.id + 1}
-            </button>
-          </li>
-        ))}
-      </ol>
-      <ProgressBar color={currentColor} percentage={percentage} />
+          </section>
+          <ol className={`slider__indicators ${indicatorsClasses()} `}>
+            {slides.map((route, i) => (
+              <li
+                className={currentIndex === i ? "--active" : ""}
+                key={route.id}
+                onClick={() => indexClick(i)}
+              >
+                <button type="button" style={{ color: currentColor }}>
+                  {route.id + 1}
+                </button>
+              </li>
+            ))}
+          </ol>
+          <ProgressBar color={currentColor} percentage={percentage} />
+        </>
+      )}
     </>
   )
 }
