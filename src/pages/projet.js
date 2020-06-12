@@ -46,6 +46,53 @@ const navRoutes = [
   },
 ]
 
+export const query = graphql`
+  query {
+    contentfulProjet(accueil: { eq: false }) {
+      titre
+      slider {
+        id
+        titre
+        couleur
+        video {
+          file {
+            url
+            contentType
+          }
+        }
+        logo {
+          fluid(quality: 70) {
+            ...GatsbyContentfulFluid_withWebp_noBase64
+          }
+        }
+        logoGauche {
+          fluid(quality: 70) {
+            ...GatsbyContentfulFluid_withWebp_noBase64
+          }
+        }
+        logoDroite {
+          id
+          fluid(quality: 70) {
+            ...GatsbyContentfulFluid_withWebp_noBase64
+          }
+        }
+        contenu {
+          contenu
+        }
+      }
+    }
+    allContentfulProjet(filter: { accueil: { eq: true } }) {
+      edges {
+        node {
+          slider {
+            couleur
+          }
+        }
+      }
+    }
+  }
+`
+
 const ProjetPage = ({ location, data }) => {
   const { isShowing, toggle } = useModal()
   const { currentColor, currentIndex } = useGlobalStateContext()
@@ -57,14 +104,14 @@ const ProjetPage = ({ location, data }) => {
     if (currentIndex === 1000 || currentColor === "#000") {
       dispatch({
         type: "CHANGE_COLOR",
-        color: `${navRoutes[0].color}`,
+        color: `${data.contentfulProjet.slider[0].couleur}`,
         index: 0,
       })
     }
   }, [currentIndex, currentColor])
 
   let timer = null
-
+  const nextColor = data.allContentfulProjet.edges[0].node.slider[0].couleur
   const handleMouseMove = () => {
     setVisible(true)
     if (timer) clearTimeout(timer)
@@ -93,12 +140,13 @@ const ProjetPage = ({ location, data }) => {
       />
       {!isHidden && (
         <Slider
+          slider={data.contentfulProjet.slider}
           slides={navRoutes}
           isShowingModal={isShowing}
           currentColor={currentColor}
           currentIndex={currentIndex}
           nextSlug=""
-          nextColor="#FFB27B"
+          nextColor={nextColor}
           isVisible={visible}
           toggleModal={toggle}
           isHidden={isHidden}
@@ -109,7 +157,7 @@ const ProjetPage = ({ location, data }) => {
         isShowingModal={isShowing}
         currentColor={currentColor}
         nextSlug=""
-        nextColor="#FFB27B"
+        nextColor={nextColor}
         isVisible={visible}
         toggleModal={toggle}
         isHidden={isHidden}
@@ -121,26 +169,23 @@ const ProjetPage = ({ location, data }) => {
         currentColor={currentColor}
         content={
           currentIndex === 1000
-            ? navRoutes[0].title
-            : navRoutes[currentIndex].title
+            ? data.contentfulProjet.slider[0].titre
+            : data.contentfulProjet.slider[currentIndex].titre
+        }
+        logoGauche={
+          currentIndex === 1000
+            ? data.contentfulProjet.slider[0].logoGauche.fluid
+            : data.contentfulProjet.slider[currentIndex].logoGauche.fluid
+        }
+        logoDroite={
+          currentIndex === 1000
+            ? data.contentfulProjet.slider[0].logoDroite
+            : data.contentfulProjet.slider[currentIndex].logoDroite
         }
         backUrl={location.pathname}
-        imgTest={data.file.childImageSharp.fluid}
       />
     </Layout>
   )
 }
-
-export const query = graphql`
-  query {
-    file(relativePath: { eq: "Canal-logo-logotype-1024x768-bleu.png" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-  }
-`
 
 export default ProjetPage

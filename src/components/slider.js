@@ -12,7 +12,6 @@ import {
 } from "../context/globalContext"
 
 const Slider = ({
-  slides,
   isShowingModal,
   currentColor,
   currentIndex,
@@ -21,19 +20,9 @@ const Slider = ({
   isVisible,
   toggleModal,
   setIsHidden,
+  slider,
 }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      file(relativePath: { eq: "logo-test.png" }) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  `)
-  const limit = slides.length
+  const limit = slider.length
   const dispatch = useGlobalDispatchContext()
   const [percentage, setPercentage] = useState(0)
 
@@ -61,7 +50,7 @@ const Slider = ({
   const changeLocalStorage = current => {
     dispatch({
       type: "CHANGE_COLOR",
-      color: `${slides[current].color}`,
+      color: `${slider[current].couleur}`,
       index: current,
     })
   }
@@ -86,7 +75,7 @@ const Slider = ({
     <>
       <section className="slider">
         <div className="slider__container">
-          {slides.map((route, i) => (
+          {/* {slides.map((route, i) => (
             <div
               className={`slider__item ${currentIndex === i ? "--on" : ""}`}
               key={route.id}
@@ -104,8 +93,30 @@ const Slider = ({
                   className="slider__item__content"
                   style={{ opacity: isVisible ? 1 : 0 }}
                 >
-                  {/* <h2 style={{ color: currentColor }}>{route.title}</h2> */}
                   <Img fluid={data.file.childImageSharp.fluid} />
+                </div>
+              )}
+            </div>
+          ))} */}
+          {slider.map((slide, i) => (
+            <div
+              className={`slider__item ${currentIndex === i ? "--on" : ""}`}
+              key={slide.id}
+            >
+              <Video
+                source={slide.video}
+                currentSlide={currentIndex}
+                position={i}
+                increment={increment}
+                currentPercentage={setCurrentPercentage}
+                limit={limit}
+              />
+              {!isShowingModal && (
+                <div
+                  className="slider__item__content"
+                  style={{ opacity: isVisible ? 1 : 0 }}
+                >
+                  <Img fluid={slide.logo.fluid} />
                 </div>
               )}
             </div>
@@ -113,14 +124,14 @@ const Slider = ({
         </div>
       </section>
       <ol className={`slider__indicators ${indicatorsClasses()} `}>
-        {slides.map((route, i) => (
+        {slider.map((route, i) => (
           <li
             className={currentIndex === i ? "--active" : ""}
             key={route.id}
             onClick={() => indexClick(i)}
           >
             <button type="button" style={{ color: currentColor }}>
-              {route.id + 1}
+              {i + 1}
             </button>
           </li>
         ))}

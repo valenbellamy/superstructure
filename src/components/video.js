@@ -77,7 +77,11 @@ const Video = ({
 
   return (
     <>
-      <video
+      <video playsInline muted ref={videoEl}>
+        <source src={source.file.url} type={source.file.contentType} />
+        <p>Sorry, the video can't be displayed with your browser.</p>
+      </video>
+      {/* <video
         playsInline
         //loop
         muted
@@ -86,13 +90,13 @@ const Video = ({
         ref={videoEl}
       >
         <source src={require(`../assets/video/${source}`)} type="video/mp4" />
-        {/* {system === "iOS" || browser === "Safari" ? (
+        {system === "iOS" || browser === "Safari" ? (
           <source src={videoMp4.file.url} type={videoMp4.file.contentType} />
         ) : (
           <source src={videoWebm.file.url} type={videoWebm.file.contentType} />
-        )} */}
+        )} 
         <p>Sorry, the video can't be displayed with your browser.</p>
-      </video>
+      </video> */}
     </>
   )
 }

@@ -35,9 +35,11 @@ const Modal = ({
   content,
   currentColor,
   backUrl,
-  imgTest,
+  logoGauche,
+  logoDroite,
 }) => {
   const [transition, setTransition] = useState(false)
+  console.log(logoDroite)
   return (
     <TransitionState>
       {({ transitionStatus }) => (
@@ -69,11 +71,12 @@ const Modal = ({
                         porttitor ipsum. Curabitur in urna a dolor lobortis
                         hendrerit sed ut metus.
                       </p>
-                      <Img fluid={imgTest} />
+                      <Img fluid={logoGauche} />
                     </div>
                     <div className="logos">
-                      <Img fluid={imgTest} />
-                      <Img fluid={imgTest} />
+                      {logoDroite.map(logo => (
+                        <Img key={logo.id} fluid={logo.fluid} />
+                      ))}
                     </div>
                   </div>
                 </div>
