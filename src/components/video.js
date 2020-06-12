@@ -14,8 +14,20 @@ const Video = ({
   const [readyState, setReadyState] = useState()
   const videoEl = useRef(null)
 
+  // useEffect(() => {
+  //   console.log("useEffect")
+  //   videoEl.current.addEventListener("loadeddata", function () {
+  //     console.log("ici")
+  //     if (videoEl.current !== "null") {
+  //       setReadyState(videoEl.current.readyState)
+  //       console.log(readyState)
+  //     }
+  //   })
+  // }, [])
+
   useEffect(() => {
-    videoEl.current.addEventListener("loadeddata", checkforVideo)
+    setPercentage(0)
+    currentPercentage(0)
     if (position === currentSlide && readyState > 3) {
       setPlay(true)
       videoEl.current.play()
@@ -48,10 +60,16 @@ const Video = ({
     return () => clearInterval(interval)
   }, [percentage, play])
 
-  const checkforVideo = () => {
-    if (videoEl.current !== "null") {
-      setReadyState(videoEl.current.readyState)
-    }
+  // const checkforVideo = () => {
+  //   console.log("ici")
+  //   if (videoEl.current !== "null") {
+  //     setReadyState(videoEl.current.readyState)
+  //     console.log(readyState)
+  //   }
+  // }
+
+  const onLoadedData = () => {
+    setReadyState(videoEl.current.readyState)
   }
 
   return (
@@ -63,6 +81,7 @@ const Video = ({
         preload="auto"
         // poster={poster ? poster.file.url : placeholder}
         ref={videoEl}
+        onLoadedData={onLoadedData}
       >
         <source src={require(`../assets/video/${source}`)} type="video/mp4" />
         {/* {system === "iOS" || browser === "Safari" ? (

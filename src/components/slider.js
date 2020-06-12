@@ -51,7 +51,6 @@ const Slider = ({
         color: `${nextColor}`,
         index: 0,
       })
-
       return
     } else {
       changeLocalStorage(currentIndex + 1)
