@@ -15,6 +15,7 @@ const Nav = ({
   nextColor,
   isVisible,
   toggleModal,
+  setIsHidden,
 }) => {
   //const { currentColor } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
@@ -23,6 +24,7 @@ const Nav = ({
     if (isShowingModal) {
       toggleModal()
     }
+    setIsHidden(true)
     navigate(`${nextSlug}`)
     dispatch({
       type: "CHANGE_COLOR",

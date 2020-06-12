@@ -51,7 +51,7 @@ const ProjetPage = ({ location, data }) => {
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
   const [visible, setVisible] = useState(true)
-  const [mounted, setMounted] = useState(false)
+  const [isHidden, setIsHidden] = useState(false)
 
   useEffect(() => {
     if (currentIndex === 1000 || currentColor === "#000") {
@@ -62,13 +62,6 @@ const ProjetPage = ({ location, data }) => {
       })
     }
   }, [currentIndex, currentColor])
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMounted(true)
-    }, 10)
-    return () => clearTimeout(timer)
-  })
 
   let timer = null
 
@@ -91,16 +84,14 @@ const ProjetPage = ({ location, data }) => {
   return (
     <Layout>
       <SEO title="Projet" />
-      <div
-      // style={{ opacity: mounted ? 1 : 0, transition: `opacity 0.3s` }}
-      >
-        <Header
-          isShowingModal={isShowing}
-          toggleModal={toggle}
-          backUrl={location.pathname}
-          currentColor={currentColor}
-          isVisible={visible}
-        />
+      <Header
+        isShowingModal={isShowing}
+        toggleModal={toggle}
+        backUrl={location.pathname}
+        currentColor={currentColor}
+        isVisible={visible}
+      />
+      {!isHidden && (
         <Slider
           slides={navRoutes}
           isShowingModal={isShowing}
@@ -110,28 +101,32 @@ const ProjetPage = ({ location, data }) => {
           nextColor="#FFB27B"
           isVisible={visible}
           toggleModal={toggle}
+          isHidden={isHidden}
+          setIsHidden={setIsHidden}
         />
-        <Nav
-          isShowingModal={isShowing}
-          currentColor={currentColor}
-          nextSlug=""
-          nextColor="#FFB27B"
-          isVisible={visible}
-          toggleModal={toggle}
-        />
-        <Modal
-          isShowingModal={isShowing}
-          toggleModal={toggle}
-          currentColor={currentColor}
-          content={
-            currentIndex === 1000
-              ? navRoutes[0].title
-              : navRoutes[currentIndex].title
-          }
-          backUrl={location.pathname}
-          imgTest={data.file.childImageSharp.fluid}
-        />
-      </div>
+      )}
+      <Nav
+        isShowingModal={isShowing}
+        currentColor={currentColor}
+        nextSlug=""
+        nextColor="#FFB27B"
+        isVisible={visible}
+        toggleModal={toggle}
+        isHidden={isHidden}
+        setIsHidden={setIsHidden}
+      />
+      <Modal
+        isShowingModal={isShowing}
+        toggleModal={toggle}
+        currentColor={currentColor}
+        content={
+          currentIndex === 1000
+            ? navRoutes[0].title
+            : navRoutes[currentIndex].title
+        }
+        backUrl={location.pathname}
+        imgTest={data.file.childImageSharp.fluid}
+      />
     </Layout>
   )
 }
