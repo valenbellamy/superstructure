@@ -11,7 +11,7 @@ const Video = ({
 }) => {
   const [play, setPlay] = useState(false)
   const [percentage, setPercentage] = useState(0)
-  const [readyState, setReadyState] = useState()
+  const [readyState, setReadyState] = useState(0)
   const videoEl = useRef(null)
 
   // useEffect(() => {
@@ -28,7 +28,7 @@ const Video = ({
   useEffect(() => {
     setPercentage(0)
     currentPercentage(0)
-    if (position === currentSlide && readyState > 3) {
+    if (position === currentSlide) {
       setPlay(true)
       videoEl.current.play()
     }
@@ -69,7 +69,10 @@ const Video = ({
   // }
 
   const onLoadedData = () => {
-    setReadyState(videoEl.current.readyState)
+    console.log(videoEl.current)
+    setTimeout(() => {
+      setReadyState(videoEl.current.readyState)
+    }, 10)
   }
 
   return (
@@ -78,10 +81,9 @@ const Video = ({
         playsInline
         //loop
         muted
-        preload="auto"
+        //preload="auto"
         // poster={poster ? poster.file.url : placeholder}
         ref={videoEl}
-        onLoadedData={onLoadedData}
       >
         <source src={require(`../assets/video/${source}`)} type="video/mp4" />
         {/* {system === "iOS" || browser === "Safari" ? (
