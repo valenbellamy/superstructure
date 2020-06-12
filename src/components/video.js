@@ -7,25 +7,25 @@ const Video = ({
   position,
   increment,
   currentPercentage,
+  limit,
 }) => {
   const [play, setPlay] = useState(false)
   const [percentage, setPercentage] = useState(0)
+  const [readyState, setReadyState] = useState()
   const videoEl = useRef(null)
 
-  //const percentage = 40
-
   useEffect(() => {
-    if (position === currentSlide) {
+    videoEl.current.addEventListener("loadeddata", checkforVideo)
+    if (position === currentSlide && readyState > 3) {
       setPlay(true)
       videoEl.current.play()
-      //setPercentage()
     }
-    if (play && position !== currentSlide) {
+    if (position !== currentSlide) {
       videoEl.current.pause()
       videoEl.current.currentTime = 0
       setPlay(false)
     }
-  }, [currentSlide, play, position])
+  }, [currentSlide, position, readyState])
 
   useEffect(() => {
     let interval = null
@@ -34,11 +34,9 @@ const Video = ({
         setPercentage(
           (videoEl.current.currentTime / videoEl.current.duration) * 100
         )
-        currentPercentage(
-          (videoEl.current.currentTime / videoEl.current.duration) * 100
-        )
+        currentPercentage(percentage)
       }, 10)
-    } else if (!play && percentage !== 0) {
+    } else if (!play) {
       clearInterval(interval)
     }
     if (percentage === 100) {
@@ -49,6 +47,12 @@ const Video = ({
     }
     return () => clearInterval(interval)
   }, [percentage, play])
+
+  const checkforVideo = () => {
+    if (videoEl.current !== "null") {
+      setReadyState(videoEl.current.readyState)
+    }
+  }
 
   return (
     <>

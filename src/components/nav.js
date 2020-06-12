@@ -20,14 +20,15 @@ const Nav = ({
   const dispatch = useGlobalDispatchContext()
 
   const nextProject = () => {
-    console.log("dispatch")
-    toggleModal()
+    if (isShowingModal) {
+      toggleModal()
+    }
+    navigate(`${nextSlug}`)
     dispatch({
       type: "CHANGE_COLOR",
       color: `${nextColor}`,
       index: 0,
     })
-    navigate(`${nextSlug}`)
   }
 
   const navClasses = () => {

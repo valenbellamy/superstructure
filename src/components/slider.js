@@ -42,15 +42,16 @@ const Slider = ({
 
   const increment = () => {
     if (currentIndex === limit - 1) {
+      if (isShowingModal) {
+        toggleModal()
+      }
+      navigate(`${nextSlug}`)
       dispatch({
         type: "CHANGE_COLOR",
         color: `${nextColor}`,
         index: 0,
       })
-      navigate(`${nextSlug}`)
-      if (isShowingModal) {
-        toggleModal()
-      }
+
       return
     } else {
       changeLocalStorage(currentIndex + 1)
@@ -96,6 +97,7 @@ const Slider = ({
                 position={i}
                 increment={increment}
                 currentPercentage={setCurrentPercentage}
+                limit={limit}
               />
               {!isShowingModal && (
                 <div
