@@ -39,7 +39,7 @@ const Modal = ({
   logoDroite,
 }) => {
   const [transition, setTransition] = useState(false)
-  console.log(logoDroite)
+  //console.log(logoDroite)
   return (
     <TransitionState>
       {({ transitionStatus }) => (
