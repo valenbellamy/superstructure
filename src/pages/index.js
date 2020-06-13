@@ -63,7 +63,7 @@ export const query = graphql`
           }
         }
         contenu {
-          contenu
+          json
         }
       }
     }
@@ -154,10 +154,15 @@ const IndexPage = ({ location, data }) => {
         isShowingModal={isShowing}
         toggleModal={toggle}
         currentColor={currentColor}
-        content={
+        titre={
           currentIndex === 1000
             ? data.contentfulProjet.slider[0].titre
             : data.contentfulProjet.slider[currentIndex].titre
+        }
+        contenu={
+          currentIndex === 1000
+            ? data.contentfulProjet.slider[0].contenu
+            : data.contentfulProjet.slider[currentIndex].contenu
         }
         logoGauche={
           currentIndex === 1000

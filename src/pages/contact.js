@@ -41,7 +41,11 @@ const ContactPage = ({ location }) => {
           </p>
           <p>
             Instagram<br></br>
-            <a href="#" target="_blank" rel="noreferrer noopener">
+            <a
+              href="https://www.instagram.com/superstructure.tv/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               @superstructure.tv
             </a>
           </p>

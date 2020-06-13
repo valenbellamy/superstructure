@@ -75,29 +75,6 @@ const Slider = ({
     <>
       <section className="slider">
         <div className="slider__container">
-          {/* {slides.map((route, i) => (
-            <div
-              className={`slider__item ${currentIndex === i ? "--on" : ""}`}
-              key={route.id}
-            >
-              <Video
-                source={route.video}
-                currentSlide={currentIndex}
-                position={i}
-                increment={increment}
-                currentPercentage={setCurrentPercentage}
-                limit={limit}
-              />
-              {!isShowingModal && (
-                <div
-                  className="slider__item__content"
-                  style={{ opacity: isVisible ? 1 : 0 }}
-                >
-                  <Img fluid={data.file.childImageSharp.fluid} />
-                </div>
-              )}
-            </div>
-          ))} */}
           {slider.map((slide, i) => (
             <div
               className={`slider__item ${currentIndex === i ? "--on" : ""}`}

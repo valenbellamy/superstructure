@@ -61,7 +61,7 @@
   position: fixed;
   bottom: calc(#{$main-padding} * 0.7);
   left: $main-padding;
-  z-index: 3;
+  z-index: 4;
   opacity: 1;
   transition: opacity 0.3s ease, transform 0.3s ease;
   transform: translate(0px);
@@ -134,7 +134,7 @@
 .slider__controls {
   position: fixed;
   top: 50%;
-  z-index: 3;
+  z-index: 4;
   margin-top: -15px;
   cursor: pointer;
   opacity: 1;

@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import ReactDOM from "react-dom"
 import Img from "gatsby-image"
 import Logo from "./logo"
-import { Link } from "gatsby"
+import RichContent from "./richContent"
 import TransitionLink from "gatsby-plugin-transition-link"
 import { TransitionState } from "gatsby-plugin-transition-link"
 
@@ -11,7 +11,6 @@ const TRANSITION_LENGTH = 1
 const exitTransition = {
   length: TRANSITION_LENGTH,
   trigger: () => {
-    console.log("exit")
     if (document) {
       document.body.style.overflow = "hidden"
     }
@@ -21,7 +20,6 @@ const exitTransition = {
 const entryTransition = {
   delay: TRANSITION_LENGTH,
   trigger: () => {
-    console.log("enter")
     if (document && window) {
       window.scrollTo(0, 0)
       document.body.style.overflow = "visible"
@@ -32,20 +30,26 @@ const entryTransition = {
 const Modal = ({
   isShowingModal,
   toggleModal,
-  content,
+  titre,
   currentColor,
   backUrl,
   logoGauche,
   logoDroite,
+  contenu,
 }) => {
   const [transition, setTransition] = useState(false)
-  //console.log(logoDroite)
+
   return (
     <TransitionState>
       {({ transitionStatus }) => (
         <>
           {isShowingModal && (
             <>
+              <div
+                className={`transition__wrapper ${
+                  transition ? "--transition" : ""
+                }`}
+              ></div>
               <div className="modal">
                 <div
                   className={`modal__overlay ${
@@ -62,15 +66,11 @@ const Modal = ({
                 >
                   <div className="modal__content">
                     <div className="content">
-                      <h1 style={{ color: currentColor }}>{content}</h1>
-                      <p style={{ color: currentColor }}>
-                        Sed porta odio at libero consectetur commodo.
-                        Suspendisse quis ligula sit amet leo porta viverra.
-                        Nullam maximus ex quis magna venenatis semper. Curabitur
-                        augue orci, pretium sed libero eu, sollicitudin
-                        porttitor ipsum. Curabitur in urna a dolor lobortis
-                        hendrerit sed ut metus.
-                      </p>
+                      <h1 style={{ color: currentColor }}>{titre}</h1>
+                      <RichContent
+                        contenu={contenu}
+                        currentColor={currentColor}
+                      />
                       <Img fluid={logoGauche} />
                     </div>
                     <div className="logos">
@@ -81,12 +81,7 @@ const Modal = ({
                   </div>
                 </div>
               </div>
-              <div
-                className={`transition__wrapper ${
-                  transition ? "--transition" : ""
-                }`}
-                onClick={toggleModal}
-              ></div>
+
               <TransitionLink
                 to="/contact"
                 exit={exitTransition}
