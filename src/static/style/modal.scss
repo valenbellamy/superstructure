@@ -48,7 +48,7 @@
     @media (max-width: 575.98px) {
       flex-direction: column;
       padding: 1.5rem 2rem;
-      height: 75vh;
+      height: 80vh;
     }
     // p {
     //   margin: 0rem;
@@ -99,10 +99,10 @@
       .gatsby-image-wrapper {
         width: 170px;
         @media (max-width: 767.98px) {
-          width: 90px;
+          width: 70px;
         }
         @media (max-width: 575.98px) {
-          width: 120px;
+          width: 110px;
         }
       }
     }
