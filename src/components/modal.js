@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import ReactDOM from "react-dom"
 import Img from "gatsby-image"
 import Logo from "./logo"
 import RichContent from "./richContent"
@@ -32,10 +31,10 @@ const Modal = ({
   toggleModal,
   titre,
   currentColor,
-  backUrl,
+  contenu,
   logoGauche,
   logoDroite,
-  contenu,
+  backUrl,
 }) => {
   const [transition, setTransition] = useState(false)
 
@@ -92,7 +91,6 @@ const Modal = ({
                 }}
               >
                 <div
-                  className="logo__wrapper"
                   className={`logo__wrapper ${
                     transition ? "--transition" : ""
                   }`}

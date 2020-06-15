@@ -15,40 +15,9 @@ import {
   useGlobalStateContext,
 } from "../context/globalContext"
 
-const navRoutes = [
-  {
-    id: 0,
-    title: "Projet video 1",
-    path: "/not-humble",
-    video: "featured-video.mp4",
-    color: "#00ff00",
-  },
-  {
-    id: 1,
-    title: "Projet video 2",
-    path: "/it-takes-an-island",
-    video: "video.mp4",
-    color: "#00ffff",
-  },
-  {
-    id: 2,
-    title: "make it zero",
-    path: "/make-it-zero",
-    video: "it-takes-an-island.mp4",
-    color: "#ff0000",
-  },
-  {
-    id: 3,
-    title: "it takes an island",
-    path: "/it-takes-an-island",
-    video: "make-it-zero.mp4",
-    color: "#00ffff",
-  },
-]
-
 export const query = graphql`
-  query {
-    contentfulProjet(accueil: { eq: false }) {
+  query($slug: String!) {
+    contentfulProjet(slug: { eq: $slug }) {
       titre
       slider {
         id
@@ -93,25 +62,31 @@ export const query = graphql`
   }
 `
 
-const ProjetPage = ({ location, data }) => {
+const Projet = ({ location, data, pageContext }) => {
   const { isShowing, toggle } = useModal()
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
   const [visible, setVisible] = useState(true)
-  const [isHidden, setIsHidden] = useState(false)
+  const [hiddenSlider, setHiddenSlider] = useState(false)
 
   useEffect(() => {
     if (currentIndex === 1000 || currentColor === "#000") {
-      dispatch({
-        type: "CHANGE_COLOR",
-        color: `${data.contentfulProjet.slider[0].couleur}`,
-        index: 0,
-      })
+      initState()
     }
   }, [currentIndex, currentColor])
 
+  const initState = () => {
+    dispatch({
+      type: "CHANGE_COLOR",
+      color: `${data.contentfulProjet.slider[0].couleur}`,
+      index: 0,
+    })
+  }
+
+  const { prevSlug, nextSlug, prevColor, nextColor } = pageContext
+
   let timer = null
-  const nextColor = data.allContentfulProjet.edges[0].node.slider[0].couleur
+
   const handleMouseMove = () => {
     setVisible(true)
     if (timer) clearTimeout(timer)
@@ -126,7 +101,7 @@ const ProjetPage = ({ location, data }) => {
       window.removeEventListener("mousemove", handleMouseMove)
       if (timer) clearTimeout(timer)
     }
-  }, [])
+  }, [timer])
 
   return (
     <Layout>
@@ -134,34 +109,33 @@ const ProjetPage = ({ location, data }) => {
       <Header
         isShowingModal={isShowing}
         toggleModal={toggle}
-        backUrl={location.pathname}
         currentColor={currentColor}
         isVisible={visible}
+        backUrl={location.pathname}
       />
-      {!isHidden && (
+      {!hiddenSlider && (
         <Slider
-          slider={data.contentfulProjet.slider}
-          slides={navRoutes}
           isShowingModal={isShowing}
+          toggleModal={toggle}
+          slider={data.contentfulProjet.slider}
           currentColor={currentColor}
           currentIndex={currentIndex}
-          nextSlug=""
+          nextSlug={nextSlug === "" ? "" : `/projet/${nextSlug}`}
           nextColor={nextColor}
           isVisible={visible}
-          toggleModal={toggle}
-          isHidden={isHidden}
-          setIsHidden={setIsHidden}
+          setHiddenSlider={setHiddenSlider}
         />
       )}
       <Nav
         isShowingModal={isShowing}
         currentColor={currentColor}
-        nextSlug=""
+        prevSlug={prevSlug === "" ? "" : `/projet/${prevSlug}`}
+        prevColor={prevColor}
+        nextSlug={nextSlug === "" ? "" : `/projet/${nextSlug}`}
         nextColor={nextColor}
         isVisible={visible}
         toggleModal={toggle}
-        isHidden={isHidden}
-        setIsHidden={setIsHidden}
+        setHiddenSlider={setHiddenSlider}
       />
       <Modal
         isShowingModal={isShowing}
@@ -193,4 +167,4 @@ const ProjetPage = ({ location, data }) => {
   )
 }
 
-export default ProjetPage
+export default Projet

@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import Video from "./video"
 import { navigate } from "gatsby"
 import ProgressBar from "./progressBar"
 import Img from "gatsby-image"
-import { useStaticQuery, graphql } from "gatsby"
 
 //context
-import {
-  useGlobalDispatchContext,
-  useGlobalStateContext,
-} from "../context/globalContext"
+import { useGlobalDispatchContext } from "../context/globalContext"
 
 const Slider = ({
   isShowingModal,
+  toggleModal,
+  slider,
   currentColor,
   currentIndex,
   nextSlug,
   nextColor,
   isVisible,
-  toggleModal,
-  setIsHidden,
-  slider,
+  setHiddenSlider,
 }) => {
   const limit = slider.length
   const dispatch = useGlobalDispatchContext()
@@ -35,8 +31,13 @@ const Slider = ({
       if (isShowingModal) {
         toggleModal()
       }
-      setIsHidden(true)
-      navigate(`${nextSlug}`)
+      setHiddenSlider(true)
+      if (nextSlug === "") {
+        navigate("")
+      } else {
+        navigate(`${nextSlug}`)
+      }
+
       dispatch({
         type: "CHANGE_COLOR",
         color: `${nextColor}`,
@@ -57,6 +58,9 @@ const Slider = ({
 
   const setCurrentPercentage = value => {
     setPercentage(value)
+    if (value === 100) {
+      increment()
+    }
   }
 
   const indicatorsClasses = () => {
@@ -84,9 +88,7 @@ const Slider = ({
                 source={slide.video}
                 currentSlide={currentIndex}
                 position={i}
-                increment={increment}
                 currentPercentage={setCurrentPercentage}
-                limit={limit}
               />
               {!isShowingModal && (
                 <div
@@ -102,12 +104,12 @@ const Slider = ({
       </section>
       <ol className={`slider__indicators ${indicatorsClasses()} `}>
         {slider.map((route, i) => (
-          <li
-            className={currentIndex === i ? "--active" : ""}
-            key={route.id}
-            onClick={() => indexClick(i)}
-          >
-            <button type="button" style={{ color: currentColor }}>
+          <li className={currentIndex === i ? "--active" : ""} key={route.id}>
+            <button
+              type="button"
+              onClick={() => indexClick(i)}
+              style={{ color: currentColor }}
+            >
               {i + 1}
             </button>
           </li>

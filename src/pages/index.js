@@ -15,23 +15,6 @@ import {
   useGlobalStateContext,
 } from "../context/globalContext"
 
-const navRoutes = [
-  {
-    id: 0,
-    title: "not humble",
-    path: "/not-humble",
-    video: "50-beaches.mp4",
-    color: "#FFB27B",
-  },
-  {
-    id: 1,
-    title: "bleeping easy",
-    path: "/bleeping-easy",
-    video: "easy.mp4",
-    color: "#0000ff",
-  },
-]
-
 export const query = graphql`
   query {
     contentfulProjet(accueil: { eq: true }) {
@@ -67,12 +50,16 @@ export const query = graphql`
         }
       }
     }
-    allContentfulProjet(filter: { ordre: { eq: 1 } }) {
+    allContentfulProjet(
+      filter: { accueil: { ne: true } }
+      sort: { fields: ordre, order: ASC }
+    ) {
       edges {
         node {
           slider {
             couleur
           }
+          slug
         }
       }
     }
@@ -84,20 +71,31 @@ const IndexPage = ({ location, data }) => {
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
   const [visible, setVisible] = useState(false)
-  const [isHidden, setIsHidden] = useState(false)
+  const [hiddenSlider, setHiddenSlider] = useState(false)
+
   useEffect(() => {
     if (currentIndex === 1000 || currentColor === "#000") {
-      dispatch({
-        type: "CHANGE_COLOR",
-        //color: `${navRoutes[0].color}`,
-        color: `${data.contentfulProjet.slider[0].couleur}`,
-        index: 0,
-      })
+      initState()
     }
   }, [currentIndex, currentColor])
 
-  let timer = null
+  const initState = () => {
+    dispatch({
+      type: "CHANGE_COLOR",
+      color: `${data.contentfulProjet.slider[0].couleur}`,
+      index: 0,
+    })
+  }
+
+  const projectLength = data.allContentfulProjet.edges.length
   const nextColor = data.allContentfulProjet.edges[0].node.slider[0].couleur
+  const prevColor =
+    data.allContentfulProjet.edges[projectLength - 1].node.slider[0].couleur
+  const prevSlug = data.allContentfulProjet.edges[projectLength - 1].node.slug
+  const nextSlug = data.allContentfulProjet.edges[0].node.slug
+
+  let timer = null
+
   const handleMouseMove = () => {
     setVisible(true)
     if (timer) clearTimeout(timer)
@@ -112,7 +110,7 @@ const IndexPage = ({ location, data }) => {
       window.removeEventListener("mousemove", handleMouseMove)
       if (timer) clearTimeout(timer)
     }
-  }, [])
+  }, [timer])
 
   return (
     <Layout>
@@ -120,35 +118,34 @@ const IndexPage = ({ location, data }) => {
       <Header
         isShowingModal={isShowing}
         toggleModal={toggle}
-        backUrl={location.pathname}
         currentColor={currentColor}
         isVisible={visible}
+        backUrl={location.pathname}
       />
-      {!isHidden && (
+      {!hiddenSlider && (
         <Slider
-          slider={data.contentfulProjet.slider}
-          slides={navRoutes}
           isShowingModal={isShowing}
+          toggleModal={toggle}
+          slider={data.contentfulProjet.slider}
           currentColor={currentColor}
           currentIndex={currentIndex}
-          nextSlug="projet"
+          nextSlug={`/projet/${nextSlug}`}
           nextColor={nextColor}
           isVisible={visible}
-          toggleModal={toggle}
-          isHidden={isHidden}
-          setIsHidden={setIsHidden}
+          setHiddenSlider={setHiddenSlider}
         />
       )}
 
       <Nav
         isShowingModal={isShowing}
+        toggleModal={toggle}
         currentColor={currentColor}
-        nextSlug="projet"
+        prevSlug={`/projet/${prevSlug}`}
+        prevColor={prevColor}
+        nextSlug={`/projet/${nextSlug}`}
         nextColor={nextColor}
         isVisible={visible}
-        toggleModal={toggle}
-        isHidden={isHidden}
-        setIsHidden={setIsHidden}
+        setHiddenSlider={setHiddenSlider}
       />
       <Modal
         isShowingModal={isShowing}
@@ -179,17 +176,5 @@ const IndexPage = ({ location, data }) => {
     </Layout>
   )
 }
-
-// export const query = graphql`
-//   query {
-//     file(relativePath: { eq: "Canal-logo-logotype-1024x768-bleu.png" }) {
-//       childImageSharp {
-//         fluid {
-//           ...GatsbyImageSharpFluid
-//         }
-//       }
-//     }
-//   }
-// `
 
 export default IndexPage

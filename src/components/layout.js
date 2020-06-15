@@ -1,7 +1,5 @@
 import React, { useEffect } from "react"
 import PropTypes from "prop-types"
-
-import Header from "./header"
 import "../static/fonts/fonts.css"
 import "../static/style/index.scss"
 
