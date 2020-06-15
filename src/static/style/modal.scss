@@ -47,7 +47,8 @@
     }
     @media (max-width: 575.98px) {
       flex-direction: column;
-      padding: 1.5rem 2rem 14rem 2rem;
+      padding: 1.5rem 2rem;
+      height: 85vh;
     }
     // p {
     //   margin: 0rem;
@@ -68,10 +69,6 @@
         p {
           margin: 0rem;
           font-family: Toren Mono;
-          font-size: 1.4rem;
-          @media (max-width: 767.98px) {
-            font-size: 1.2rem;
-          }
         }
         a {
           text-decoration: underline;
@@ -100,8 +97,11 @@
     .content,
     .logos {
       .gatsby-image-wrapper {
-        width: 200px;
+        width: 170px;
         @media (max-width: 767.98px) {
+          width: 90px;
+        }
+        @media (max-width: 575.98px) {
           width: 120px;
         }
       }

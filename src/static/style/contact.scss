@@ -37,13 +37,13 @@
   .info {
     opacity: 0;
     transition: opacity 0.6s ease 0.15s;
+    margin-bottom: 2rem;
     > p {
       color: black;
       font-family: Toren Mono;
-      margin-bottom: 1rem;
+      margin-bottom: 3rem;
       a {
         color: black;
-        font-size: 1.4rem;
         text-transform: inherit;
         font-family: Toren Mono;
         text-decoration: none;
