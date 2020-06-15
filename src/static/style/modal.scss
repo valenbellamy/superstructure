@@ -48,7 +48,7 @@
     @media (max-width: 575.98px) {
       flex-direction: column;
       padding: 1.5rem 2rem;
-      height: 85vh;
+      height: 75vh;
     }
     // p {
     //   margin: 0rem;
@@ -120,8 +120,11 @@
   transition: top 1s cubic-bezier(0.69, 0, 0.28, 1),
     transform 1s cubic-bezier(0.69, 0, 0.28, 1);
   @media (max-width: 767.98px) {
-    top: calc(100% - 2rem);
+    top: 100%;
     padding: 0 2rem;
+  }
+  @media (max-width: 575.98px) {
+    top: calc(100% - 2rem);
   }
   &.--transition {
     z-index: 5;

@@ -38,10 +38,22 @@
     opacity: 0;
     transition: opacity 0.6s ease 0.15s;
     margin-bottom: 2rem;
+    @media (max-width: 767.98px) {
+      margin-bottom: 0rem;
+    }
+    @media (max-width: 575.98px) {
+      margin-bottom: 6rem;
+    }
     > p {
       color: black;
       font-family: Toren Mono;
       margin-bottom: 3rem;
+      @media (max-width: 767.98px) {
+        margin-bottom: 1.5rem;
+      }
+      @media (max-width: 575.98px) {
+        margin-bottom: 2rem;
+      }
       a {
         color: black;
         text-transform: inherit;
