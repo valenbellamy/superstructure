@@ -21,6 +21,7 @@ const Slider = ({
   const limit = slider.length
   const dispatch = useGlobalDispatchContext()
   const [percentage, setPercentage] = useState(0)
+  const [isSwiping, setSwiping] = useState(false)
 
   const indexClick = i => {
     changeLocalStorage(i)
@@ -59,7 +60,7 @@ const Slider = ({
   const setCurrentPercentage = value => {
     setPercentage(value)
     if (value === 100) {
-      increment()
+      //increment()
     }
   }
 
@@ -75,9 +76,65 @@ const Slider = ({
     }
   }
 
+  var initialX = null
+  var initialY = null
+
+  const onTouchStart = e => {
+    initialX = e.touches[0].clientX
+    initialY = e.touches[0].clientY
+    //console.log(initialX)
+  }
+
+  const onTouchMove = e => {
+    if (initialX === null || initialY === null) {
+      return
+    }
+    var currentX = e.touches[0].clientX
+    var currentY = e.touches[0].clientY
+
+    var diffX = initialX - currentX
+    var diffY = initialY - currentY
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      // sliding horizontally
+      if (diffX > 0) {
+        console.log("swiped left")
+      } else {
+        console.log("swiped right")
+        if (nextSlug === "") {
+          navigate("")
+        } else {
+          navigate(`${nextSlug}`)
+        }
+      }
+      // } else {
+      //   if (diffY > 0) {
+      //     console.log("swiped up")
+      //   } else {
+      //     console.log("swiped down")
+      //   }
+    }
+    initialX = null
+    initialY = null
+  }
+
   return (
     <>
-      <section className="slider">
+      <section
+        className="slider"
+        onTouchStart={e => {
+          setSwiping(false)
+
+          onTouchStart(e)
+        }}
+        onTouchMove={e => {
+          setSwiping(true)
+          onTouchMove(e)
+        }}
+        onTouchEnd={e => {
+          e.preventDefault()
+          setSwiping(false)
+        }}
+      >
         <div className="slider__container">
           {slider.map((slide, i) => (
             <div

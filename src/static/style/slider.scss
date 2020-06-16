@@ -41,6 +41,9 @@
       .slider__item__content {
         transition: opacity 0.3s ease;
         width: 23vw;
+        @media (max-width: 767.98px) {
+          width: 30vw;
+        }
       }
     }
   }
