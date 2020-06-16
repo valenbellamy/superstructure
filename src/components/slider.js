@@ -13,6 +13,8 @@ const Slider = ({
   slider,
   currentColor,
   currentIndex,
+  prevSlug,
+  prevColor,
   nextSlug,
   nextColor,
   isVisible,
@@ -34,12 +36,7 @@ const Slider = ({
         toggleModal()
       }
       setHiddenSlider(true)
-      if (nextSlug === "") {
-        navigate("")
-      } else {
-        navigate(`${nextSlug}`)
-      }
-
+      navigate(`${nextSlug}`)
       dispatch({
         type: "CHANGE_COLOR",
         color: `${nextColor}`,
@@ -61,7 +58,7 @@ const Slider = ({
   const setCurrentPercentage = value => {
     setPercentage(value)
     if (value === 100) {
-      //increment()
+      increment()
     }
   }
 
@@ -91,16 +88,22 @@ const Slider = ({
       var currentX = e.changedTouches[0].clientX
       var currentY = e.changedTouches[0].clientY
       var diffX = x - currentX
-      var diffY = initialY - currentY
-      if (diffX < 0) {
-        console.log("swipe right")
-        if (nextSlug === "") {
-          navigate("")
-        } else {
+      if (Math.abs(diffX) > 50) {
+        if (diffX < 0) {
           navigate(`${nextSlug}`)
+          dispatch({
+            type: "CHANGE_COLOR",
+            color: `${nextColor}`,
+            index: 0,
+          })
+        } else {
+          navigate(`${prevSlug}`)
+          dispatch({
+            type: "CHANGE_COLOR",
+            color: `${prevColor}`,
+            index: 0,
+          })
         }
-      } else {
-        console.log("swipe left")
       }
     }
     // if (Math.abs(diffX) > Math.abs(diffY)) {
@@ -131,15 +134,12 @@ const Slider = ({
         className="slider"
         onTouchStart={e => {
           setSwiping(false)
-
           onTouchStart(e)
         }}
         onTouchMove={e => {
           setSwiping(true)
         }}
         onTouchEnd={e => {
-          //e.preventDefault()
-          e.persist()
           onTouchEnd(e)
           setSwiping(false)
         }}
@@ -168,19 +168,22 @@ const Slider = ({
           ))}
         </div>
       </section>
-      <ol className={`slider__indicators ${indicatorsClasses()} `}>
-        {slider.map((route, i) => (
-          <li className={currentIndex === i ? "--active" : ""} key={route.id}>
-            <button
-              type="button"
-              onClick={() => indexClick(i)}
-              style={{ color: currentColor }}
-            >
-              {i + 1}
-            </button>
-          </li>
-        ))}
-      </ol>
+      {slider.length > 1 && (
+        <ol className={`slider__indicators ${indicatorsClasses()} `}>
+          {slider.map((route, i) => (
+            <li className={currentIndex === i ? "--active" : ""} key={route.id}>
+              <button
+                type="button"
+                onClick={() => indexClick(i)}
+                style={{ color: currentColor }}
+              >
+                {i + 1}
+              </button>
+            </li>
+          ))}
+        </ol>
+      )}
+
       <ProgressBar color={currentColor} percentage={percentage} />
     </>
   )

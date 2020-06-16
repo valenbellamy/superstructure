@@ -91,8 +91,14 @@ const IndexPage = ({ location, data }) => {
   const nextColor = data.allContentfulProjet.edges[0].node.slider[0].couleur
   const prevColor =
     data.allContentfulProjet.edges[projectLength - 1].node.slider[0].couleur
-  const prevSlug = data.allContentfulProjet.edges[projectLength - 1].node.slug
-  const nextSlug = data.allContentfulProjet.edges[0].node.slug
+  const prevSlug =
+    data.allContentfulProjet.edges[projectLength - 1].node.slug === ""
+      ? ""
+      : `/projet/${data.allContentfulProjet.edges[projectLength - 1].node.slug}`
+  const nextSlug =
+    data.allContentfulProjet.edges[0].node.slug === ""
+      ? ""
+      : `/projet/${data.allContentfulProjet.edges[0].node.slug}`
 
   let timer = null
 
@@ -129,7 +135,9 @@ const IndexPage = ({ location, data }) => {
           slider={data.contentfulProjet.slider}
           currentColor={currentColor}
           currentIndex={currentIndex}
-          nextSlug={`/projet/${nextSlug}`}
+          prevSlug={prevSlug}
+          prevColor={prevColor}
+          nextSlug={nextSlug}
           nextColor={nextColor}
           isVisible={visible}
           setHiddenSlider={setHiddenSlider}
@@ -140,9 +148,9 @@ const IndexPage = ({ location, data }) => {
         isShowingModal={isShowing}
         toggleModal={toggle}
         currentColor={currentColor}
-        prevSlug={`/projet/${prevSlug}`}
+        prevSlug={prevSlug}
         prevColor={prevColor}
-        nextSlug={`/projet/${nextSlug}`}
+        nextSlug={nextSlug}
         nextColor={nextColor}
         isVisible={visible}
         setHiddenSlider={setHiddenSlider}

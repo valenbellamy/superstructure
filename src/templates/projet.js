@@ -120,6 +120,8 @@ const Projet = ({ location, data, pageContext }) => {
           slider={data.contentfulProjet.slider}
           currentColor={currentColor}
           currentIndex={currentIndex}
+          prevSlug={prevSlug === "" ? "" : `/projet/${prevSlug}`}
+          prevColor={prevColor}
           nextSlug={nextSlug === "" ? "" : `/projet/${nextSlug}`}
           nextColor={nextColor}
           isVisible={visible}
