@@ -3,6 +3,7 @@ import React, { useReducer, useContext, createContext } from "react"
 const defaultState = {
   currentColor: "#000",
   currentIndex: 1000,
+  modalOpen: false,
 }
 
 const GlobalStateContext = createContext(defaultState)
@@ -15,7 +16,12 @@ const globalReducer = (state, action) => {
         ...state,
         currentColor: action.color,
         currentIndex: action.index,
-        //backUrl: action.backUrl,
+      }
+    }
+    case "TOGGLE_MODAL": {
+      return {
+        ...state,
+        modalOpen: action.modalOpen,
       }
     }
     default: {
@@ -28,6 +34,7 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, {
     currentColor: "#000",
     currentIndex: 1000,
+    modalOpen: false,
     //backUrl: null,
     //backUrl: '/'
     // currentColor:

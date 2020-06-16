@@ -18,9 +18,9 @@ const Nav = ({
   const dispatch = useGlobalDispatchContext()
 
   const nextProject = () => {
-    if (isShowingModal) {
-      toggleModal()
-    }
+    // if (isShowingModal) {
+    //   toggleModal()
+    // }
     setHiddenSlider(true)
     //navigate(`${nextSlug}`)
     dispatch({
@@ -31,9 +31,9 @@ const Nav = ({
   }
 
   const prevProject = () => {
-    if (isShowingModal) {
-      toggleModal()
-    }
+    // if (isShowingModal) {
+    //   toggleModal()
+    // }
     setHiddenSlider(true)
     //navigate(`${prevSlug}`)
     dispatch({

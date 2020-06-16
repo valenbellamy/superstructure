@@ -64,7 +64,7 @@ export const query = graphql`
 
 const Projet = ({ location, data, pageContext }) => {
   const { isShowing, toggle } = useModal()
-  const { currentColor, currentIndex } = useGlobalStateContext()
+  const { currentColor, currentIndex, modalOpen } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
   const [visible, setVisible] = useState(true)
   const [hiddenSlider, setHiddenSlider] = useState(false)

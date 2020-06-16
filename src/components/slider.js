@@ -32,9 +32,9 @@ const Slider = ({
 
   const increment = () => {
     if (currentIndex === limit - 1) {
-      if (isShowingModal) {
-        toggleModal()
-      }
+      // if (isShowingModal) {
+      //   toggleModal()
+      // }
       setHiddenSlider(true)
       navigate(`${nextSlug}`)
       dispatch({
@@ -75,18 +75,15 @@ const Slider = ({
   }
 
   var initialX = null
-  var initialY = null
 
   const onTouchStart = e => {
     initialX = e.touches[0].clientX
-    initialY = e.touches[0].clientY
     setX(initialX)
   }
 
   const onTouchEnd = e => {
     if (isSwiping) {
       var currentX = e.changedTouches[0].clientX
-      var currentY = e.changedTouches[0].clientY
       var diffX = x - currentX
       if (Math.abs(diffX) > 50) {
         if (diffX < 0) {
@@ -106,26 +103,6 @@ const Slider = ({
         }
       }
     }
-    // if (Math.abs(diffX) > Math.abs(diffY)) {
-    //   if (diffX > 0) {
-    //     console.log("swiped left")
-    //   } else {
-    //     console.log("swiped right")
-    //     if (nextSlug === "") {
-    //       navigate("")
-    //     } else {
-    //       navigate(`${nextSlug}`)
-    //     }
-    //   }
-    //   } else {
-    //     if (diffY > 0) {
-    //       console.log("swiped up")
-    //     } else {
-    //       console.log("swiped down")
-    //     }
-    // }
-    // initialX = null
-    // initialY = null
   }
 
   return (
