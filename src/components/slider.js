@@ -22,6 +22,7 @@ const Slider = ({
   const dispatch = useGlobalDispatchContext()
   const [percentage, setPercentage] = useState(0)
   const [isSwiping, setSwiping] = useState(false)
+  const [x, setX] = useState(null)
 
   const indexClick = i => {
     changeLocalStorage(i)
@@ -82,39 +83,46 @@ const Slider = ({
   const onTouchStart = e => {
     initialX = e.touches[0].clientX
     initialY = e.touches[0].clientY
-    //console.log(initialX)
+    setX(initialX)
   }
 
-  const onTouchMove = e => {
-    if (initialX === null || initialY === null) {
-      return
-    }
-    var currentX = e.touches[0].clientX
-    var currentY = e.touches[0].clientY
-
-    var diffX = initialX - currentX
-    var diffY = initialY - currentY
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-      // sliding horizontally
-      if (diffX > 0) {
-        console.log("swiped left")
-      } else {
-        console.log("swiped right")
+  const onTouchEnd = e => {
+    if (isSwiping) {
+      var currentX = e.changedTouches[0].clientX
+      var currentY = e.changedTouches[0].clientY
+      var diffX = x - currentX
+      var diffY = initialY - currentY
+      if (diffX < 0) {
+        console.log("swipe right")
         if (nextSlug === "") {
           navigate("")
         } else {
           navigate(`${nextSlug}`)
         }
+      } else {
+        console.log("swipe left")
       }
-      // } else {
-      //   if (diffY > 0) {
-      //     console.log("swiped up")
-      //   } else {
-      //     console.log("swiped down")
-      //   }
     }
-    initialX = null
-    initialY = null
+    // if (Math.abs(diffX) > Math.abs(diffY)) {
+    //   if (diffX > 0) {
+    //     console.log("swiped left")
+    //   } else {
+    //     console.log("swiped right")
+    //     if (nextSlug === "") {
+    //       navigate("")
+    //     } else {
+    //       navigate(`${nextSlug}`)
+    //     }
+    //   }
+    //   } else {
+    //     if (diffY > 0) {
+    //       console.log("swiped up")
+    //     } else {
+    //       console.log("swiped down")
+    //     }
+    // }
+    // initialX = null
+    // initialY = null
   }
 
   return (
@@ -128,10 +136,11 @@ const Slider = ({
         }}
         onTouchMove={e => {
           setSwiping(true)
-          onTouchMove(e)
         }}
         onTouchEnd={e => {
-          e.preventDefault()
+          //e.preventDefault()
+          e.persist()
+          onTouchEnd(e)
           setSwiping(false)
         }}
       >
