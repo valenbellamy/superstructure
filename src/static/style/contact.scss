@@ -19,6 +19,12 @@
   .logo {
     width: 100%;
     margin: 0 auto;
+    @media (max-width: 767.98px) {
+      padding: 0rem 4rem;
+    }
+    @media (max-width: 575.98px) {
+      padding: 0rem;
+    }
     svg {
       width: 100%;
     }

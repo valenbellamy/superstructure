@@ -106,6 +106,16 @@
         }
       }
     }
+    .content {
+      .gatsby-image-wrapper {
+        @media (max-width: 767.98px) {
+          display: none;
+        }
+        @media (max-width: 575.98px) {
+          display: block;
+        }
+      }
+    }
   }
 }
 
@@ -121,10 +131,11 @@
     transform 1s cubic-bezier(0.69, 0, 0.28, 1);
   @media (max-width: 767.98px) {
     top: 100%;
-    padding: 0 2rem;
+    padding: 0 6rem;
   }
   @media (max-width: 575.98px) {
     top: calc(100% - 2rem);
+    padding: 0 2rem;
   }
   &.--transition {
     z-index: 5;

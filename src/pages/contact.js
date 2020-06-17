@@ -29,7 +29,7 @@ const ContactPage = ({ location }) => {
       <section className={`contact ${active ? "--active" : ""}`}>
         <Logo currentColor="#000" />
         <Link to={`${backUrl}`} className="link">
-          back
+          retour
         </Link>
         <div className="info">
           <p>
@@ -47,7 +47,7 @@ const ContactPage = ({ location }) => {
             </a>
           </p>
           <p className="--small">
-            Design by{" "}
+            Design par{" "}
             <a
               href="https://studiomitsu.com"
               target="_blank"
@@ -55,7 +55,7 @@ const ContactPage = ({ location }) => {
             >
               Studio Mitsu
             </a>
-            <br></br>Code by{" "}
+            <br></br>Code par{" "}
             <a
               href="https://valentinbellamy.com"
               target="_blank"
