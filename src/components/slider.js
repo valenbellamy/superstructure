@@ -11,6 +11,7 @@ const Slider = ({
   isShowingModal,
   toggleModal,
   slider,
+  titre,
   currentColor,
   currentIndex,
   prevSlug,
@@ -32,9 +33,6 @@ const Slider = ({
 
   const increment = () => {
     if (currentIndex === limit - 1) {
-      // if (isShowingModal) {
-      //   toggleModal()
-      // }
       setHiddenSlider(true)
       navigate(`${nextSlug}`)
       dispatch({
@@ -58,7 +56,7 @@ const Slider = ({
   const setCurrentPercentage = value => {
     setPercentage(value)
     if (value === 100) {
-      //increment()
+      increment()
     }
   }
 
@@ -133,16 +131,24 @@ const Slider = ({
                 position={i}
                 currentPercentage={setCurrentPercentage}
               />
-              {!isShowingModal && (
+              {/* {!isShowingModal && (
                 <div
                   className="slider__item__content"
                   style={{ opacity: isVisible ? 1 : 0 }}
                 >
                   <Img fluid={slide.logo.fluid} />
                 </div>
-              )}
+              )} */}
             </div>
           ))}
+          {!isShowingModal && (
+            <div
+              className="slider__title"
+              style={{ opacity: isVisible ? 1 : 0 }}
+            >
+              <h1 style={{ color: currentColor }}>{titre}</h1>
+            </div>
+          )}
         </div>
       </section>
       {slider.length > 1 && (

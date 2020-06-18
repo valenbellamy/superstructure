@@ -70,13 +70,15 @@ const Modal = ({
                         contenu={contenu}
                         currentColor={currentColor}
                       />
-                      <Img fluid={logoGauche} />
+                      {logoGauche && <Img fluid={logoGauche} />}
                     </div>
-                    <div className="logos">
-                      {logoDroite.map(logo => (
-                        <Img key={logo.id} fluid={logo.fluid} />
-                      ))}
-                    </div>
+                    {logoDroite && (
+                      <div className="logos">
+                        {logoDroite.map(logo => (
+                          <Img key={logo.id} fluid={logo.fluid} />
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

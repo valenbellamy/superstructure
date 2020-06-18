@@ -30,18 +30,18 @@ export const query = graphql`
           }
         }
         logo {
-          fluid(quality: 70) {
+          fluid(quality: 50) {
             ...GatsbyContentfulFluid_withWebp_noBase64
           }
         }
         logoGauche {
-          fluid(quality: 70) {
+          fluid(quality: 50) {
             ...GatsbyContentfulFluid_withWebp_noBase64
           }
         }
         logoDroite {
           id
-          fluid(quality: 70) {
+          fluid(quality: 50) {
             ...GatsbyContentfulFluid_withWebp_noBase64
           }
         }
@@ -118,6 +118,7 @@ const Projet = ({ location, data, pageContext }) => {
           isShowingModal={isShowing}
           toggleModal={toggle}
           slider={data.contentfulProjet.slider}
+          titre={data.contentfulProjet.titre}
           currentColor={currentColor}
           currentIndex={currentIndex}
           prevSlug={prevSlug === "" ? "" : `/projet/${prevSlug}`}
