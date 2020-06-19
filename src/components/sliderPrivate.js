@@ -56,7 +56,7 @@ const SliderPrivate = ({
   const setCurrentPercentage = value => {
     setPercentage(value)
     if (value === 100) {
-      //increment()
+      increment()
     }
   }
 

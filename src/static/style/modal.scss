@@ -48,7 +48,7 @@
     @media (max-width: 575.98px) {
       flex-direction: column;
       padding: 1.5rem 2rem;
-      height: 80vh;
+      height: 85vh;
     }
     // p {
     //   margin: 0rem;
@@ -83,18 +83,31 @@
     }
     .logos {
       margin-left: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 1rem;
+      height: 40vh;
       .gatsby-image-wrapper {
-        margin-bottom: 1rem;
+        width: 100px;
+        img {
+          height: auto !important;
+        }
         @media (max-width: 767.98px) {
-          margin-bottom: 0.5rem;
+          width: 70px;
+        }
+        @media (max-width: 575.98px) {
+          align-self: flex-end;
         }
       }
       @media (max-width: 767.98px) {
         margin-left: 0;
+        grid-gap: 0.5rem;
+      }
+      @media (max-width: 575.98px) {
+        height: auto;
       }
     }
-    .content,
-    .logos {
+    .content {
       .gatsby-image-wrapper {
         width: 100px;
         @media (max-width: 767.98px) {

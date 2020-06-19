@@ -65,17 +65,21 @@
   opacity: 1;
   transition: opacity 0.3s ease, transform 0.3s ease;
   transform: translate(0px);
+  @media (max-width: 767.98px) {
+    right: 2rem;
+    bottom: 1rem;
+  }
   &.--hidden {
     opacity: 0;
     transform: translate(0px, 100px);
   }
   svg {
     width: 20vw;
-    // @media (max-width: 767.98px) {
-    //   font-size: 1.2rem;
-    // }
-    @media (max-width: 575.98px) {
+    @media (max-width: 767.98px) {
       width: 30vw;
+    }
+    @media (max-width: 575.98px) {
+      width: 20vw;
     }
   }
 }
@@ -107,14 +111,14 @@
     display: inline-block;
     padding: 0rem 1rem;
     cursor: pointer;
-    line-height: 1;
+    //line-height: 1.1;
     &:first-child {
       padding-left: 0rem;
     }
     button {
       vertical-align: middle;
       font-size: 4rem;
-      line-height: 4rem;
+      //line-height: 1.1;
       color: white;
       font-family: Helvetica;
       cursor: pointer;
@@ -131,10 +135,9 @@
         cursor: initial;
         vertical-align: bottom;
         font-size: 2rem;
-        line-height: 2rem;
+        //line-height: 1.1;
         @media (max-width: 767.98px) {
           font-size: 1.5rem;
-          line-height: 1.5rem;
         }
       }
     }
