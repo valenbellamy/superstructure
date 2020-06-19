@@ -1,8 +1,9 @@
 const path = require("path")
 
-module.exports.createPages = async ({ graphql, actions }) => {
+module.exports.createPages = async ({ graphql, page, actions }) => {
   const { createPage } = actions
   const projetTemplate = path.resolve("./src/templates/projet.js")
+  const projetPrivateTemplate = path.resolve("./src/templates/private.js")
 
   const res = await graphql(`
     query {
@@ -24,19 +25,27 @@ module.exports.createPages = async ({ graphql, actions }) => {
           couleur
         }
       }
+      allContentfulProjetPrive(sort: { fields: ordre, order: ASC }) {
+        edges {
+          node {
+            slug
+            slider {
+              couleur
+            }
+          }
+        }
+      }
     }
   `)
+
   const projects = res.data.allContentfulProjet.edges
   const home = res.data.contentfulProjet
   projects.forEach((edge, index) => {
-    console.log(home.slider.couleur)
     createPage({
       component: projetTemplate,
       path: `/projet/${edge.node.slug}`,
       context: {
         slug: edge.node.slug,
-        // prevColor: "#098765",
-        // nextColor: "#123456",
         prevColor:
           index === 0
             ? home.slider[0].couleur
@@ -48,14 +57,33 @@ module.exports.createPages = async ({ graphql, actions }) => {
         prevSlug: index === 0 ? "" : projects[index - 1].node.slug,
         nextSlug:
           index === projects.length - 1 ? "" : projects[index + 1].node.slug,
-        // prev:
-        //   index === 0
-        //     ? projects[projects.length - 1].node
-        //     : projects[index - 1].node,
-        // next:
-        //   index === projects.length - 1
-        //     ? projects[0].node
-        //     : projects[index + 1].node,
+      },
+    })
+  })
+
+  const privateProjects = res.data.allContentfulProjetPrive.edges
+  privateProjects.forEach((edge, index) => {
+    createPage({
+      component: projetPrivateTemplate,
+      path: `/prive/${edge.node.slug}`,
+      context: {
+        slug: edge.node.slug,
+        prevColor:
+          index === 0
+            ? privateProjects[privateProjects.length - 1].node.slider[0].couleur
+            : privateProjects[index - 1].node.slider[0].couleur,
+        nextColor:
+          index === privateProjects.length - 1
+            ? privateProjects[0].node.slider[0].couleur
+            : privateProjects[index + 1].node.slider[0].couleur,
+        prevSlug:
+          index === 0
+            ? privateProjects[privateProjects.length - 1].node.slug
+            : privateProjects[index - 1].node.slug,
+        nextSlug:
+          index === privateProjects.length - 1
+            ? privateProjects[0].node.slug
+            : privateProjects[index + 1].node.slug,
       },
     })
   })

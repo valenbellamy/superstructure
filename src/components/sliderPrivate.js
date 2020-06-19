@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Video from "./video"
+import VideoPrivate from "./videoPrivate"
 import { navigate } from "gatsby"
 import ProgressBar from "./progressBar"
 import Logo from "./logo"
@@ -7,7 +7,7 @@ import Logo from "./logo"
 //context
 import { useGlobalDispatchContext } from "../context/globalContext"
 
-const Slider = ({
+const SliderPrivate = ({
   isShowingModal,
   toggleModal,
   slider,
@@ -125,8 +125,8 @@ const Slider = ({
               className={`slider__item ${currentIndex === i ? "--on" : ""}`}
               key={slide.id}
             >
-              <Video
-                source={slide.video}
+              <VideoPrivate
+                source={slide.lienVimeo}
                 currentSlide={currentIndex}
                 position={i}
                 currentPercentage={setCurrentPercentage}
@@ -165,4 +165,4 @@ const Slider = ({
   )
 }
 
-export default Slider
+export default SliderPrivate
