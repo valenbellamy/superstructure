@@ -105,6 +105,8 @@
       }
       @media (max-width: 575.98px) {
         height: auto;
+        position: fixed;
+        bottom: 12rem;
       }
     }
     .content {
@@ -143,7 +145,7 @@
     transform 1s cubic-bezier(0.69, 0, 0.28, 1);
   @media (max-width: 767.98px) {
     top: 100%;
-    padding: 0 6rem;
+    padding: 0 8rem;
   }
   @media (max-width: 575.98px) {
     top: calc(100% - 2rem);
