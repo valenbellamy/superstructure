@@ -36,7 +36,7 @@ const Video = ({ source, currentSlide, position, currentPercentage }) => {
 
   return (
     <>
-      <video playsInline preload="auto" muted ref={videoEl}>
+      <video playsInline preload="none" muted ref={videoEl}>
         <source src={source.file.url} type={source.file.contentType} />
         <p>Sorry, the video can't be displayed with your browser.</p>
       </video>
