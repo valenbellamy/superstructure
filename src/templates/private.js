@@ -51,8 +51,6 @@ const Private = ({ location, data, pageContext }) => {
   const dispatch = useGlobalDispatchContext()
   const [visible, setVisible] = useState(true)
   const [hiddenSlider, setHiddenSlider] = useState(false)
-  const [name, setName] = useState("")
-  const [password, setPassword] = useState("")
   const [logged, setLogged] = useState(false)
 
   useEffect(() => {
