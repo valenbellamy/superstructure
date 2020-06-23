@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Video from "./video"
 import { navigate } from "gatsby"
 import ProgressBar from "./progressBar"
 import Logo from "./logo"
 import Logo2 from "./logo2"
+import useWindowSize from "./hooks/useWindowSize"
 
 //context
 import { useGlobalDispatchContext } from "../context/globalContext"
@@ -27,19 +28,7 @@ const Slider = ({
   const [percentage, setPercentage] = useState(0)
   const [isSwiping, setSwiping] = useState(false)
   const [x, setX] = useState(null)
-  const [windowWidth, setWindowWidth] = useState("")
-
-  useEffect(() => {
-    computeWindowWidth
-    window.addEventListener("resize", computeWindowWidth)
-    return () => {
-      window.removeEventListener("resize", computeWindowWidth)
-    }
-  }, [])
-
-  const computeWindowWidth = () => {
-    setWindowWidth(window.innerWidth)
-  }
+  const [width, height] = useWindowSize()
 
   const indexClick = i => {
     changeLocalStorage(i)
@@ -155,7 +144,7 @@ const Slider = ({
             <h1 style={{ color: currentColor }}>{titre}</h1>
           </div>
           <div className={`slider__logo ${isVisible ? "" : "--hidden"}`}>
-            {windowWidth > 575 ? (
+            {width > 575 ? (
               <Logo currentColor={currentColor} />
             ) : (
               <Logo2 currentColor={currentColor} />

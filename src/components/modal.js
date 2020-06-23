@@ -4,6 +4,7 @@ import Logo from "./logo"
 import RichContent from "./richContent"
 import TransitionLink from "gatsby-plugin-transition-link"
 import { TransitionState } from "gatsby-plugin-transition-link"
+import useWindowSize from "./hooks/useWindowSize"
 
 const TRANSITION_LENGTH = 1
 
@@ -39,19 +40,7 @@ const Modal = ({
 }) => {
   const [transition, setTransition] = useState(false)
 
-  const [windowWidth, setWindowWidth] = useState("")
-
-  useEffect(() => {
-    computeWindowWidth
-    window.addEventListener("resize", computeWindowWidth)
-    return () => {
-      window.removeEventListener("resize", computeWindowWidth)
-    }
-  }, [])
-
-  const computeWindowWidth = () => {
-    setWindowWidth(window.innerWidth)
-  }
+  const [width, height] = useWindowSize()
 
   return (
     <TransitionState>
@@ -87,7 +76,7 @@ const Modal = ({
                       />
                       {logoGauche && <Img fluid={logoGauche} />}
                     </div>
-                    {windowWidth > 575 ? (
+                    {width > 575 ? (
                       <>
                         {logoDroite && (
                           <div className="logos">

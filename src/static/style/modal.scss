@@ -82,11 +82,11 @@
       }
     }
     .logos {
-      width: 35%;
-      max-height: 40vh;
+      width: 22%;
+      //max-height: 40vh;
       .gatsby-image-wrapper {
-        width: 100%;
-        max-height: 40vh;
+        //width: 100%;
+        //max-height: 40vh;
         //height: 40vh;
         // img {
         //   height: auto !important;
@@ -100,9 +100,10 @@
       }
       @media (max-width: 575.98px) {
         position: fixed;
+        left: 25%;
         bottom: 12rem;
         max-height: 30vh;
-        width: 40%;
+        width: 50%;
       }
     }
     .content {
