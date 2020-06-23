@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Img from "gatsby-image"
 import Logo from "./logo"
 import RichContent from "./richContent"
@@ -39,6 +39,19 @@ const Modal = ({
 }) => {
   const [transition, setTransition] = useState(false)
 
+  const [windowWidth, setWindowWidth] = useState("")
+
+  useEffect(() => {
+    window.addEventListener("resize", computeWindowWidth)
+    return () => {
+      window.removeEventListener("resize", computeWindowWidth)
+    }
+  }, [])
+
+  const computeWindowWidth = () => {
+    setWindowWidth(window.innerWidth)
+  }
+
   return (
     <TransitionState>
       {({ transitionStatus }) => (
@@ -73,7 +86,7 @@ const Modal = ({
                       />
                       {logoGauche && <Img fluid={logoGauche} />}
                     </div>
-                    {window.innerWidth > 768 ? (
+                    {windowWidth > 575 ? (
                       <>
                         {logoDroite && (
                           <div className="logos">
