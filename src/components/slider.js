@@ -3,6 +3,7 @@ import Video from "./video"
 import { navigate } from "gatsby"
 import ProgressBar from "./progressBar"
 import Logo from "./logo"
+import Logo2 from "./logo2"
 
 //context
 import { useGlobalDispatchContext } from "../context/globalContext"
@@ -56,7 +57,7 @@ const Slider = ({
   const setCurrentPercentage = value => {
     setPercentage(value)
     if (value === 100) {
-      increment()
+      //increment()
     }
   }
 
@@ -141,7 +142,11 @@ const Slider = ({
             <h1 style={{ color: currentColor }}>{titre}</h1>
           </div>
           <div className={`slider__logo ${isVisible ? "" : "--hidden"}`}>
-            <Logo currentColor={currentColor} />
+            {window.innerWidth > 575 ? (
+              <Logo currentColor={currentColor} />
+            ) : (
+              <Logo2 currentColor={currentColor} />
+            )}
           </div>
         </>
       )}

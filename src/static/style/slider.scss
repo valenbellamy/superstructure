@@ -19,11 +19,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: -1;
+      z-index: 0;
       opacity: 0;
-      transition: opacity 0.4s ease-out;
+      transition: opacity 1s linear;
       &.--on {
-        z-index: 0;
+        z-index: 1;
         opacity: 1;
         video {
           display: block;
@@ -74,12 +74,12 @@
     transform: translate(0px, 100px);
   }
   svg {
-    width: 20vw;
+    width: 15vw;
     @media (max-width: 767.98px) {
-      width: 30vw;
+      width: 25vw;
     }
     @media (max-width: 575.98px) {
-      width: 35vw;
+      width: 30vw;
     }
   }
 }
@@ -101,11 +101,18 @@
     transform: translate(0px, 100px);
   }
   &.--centered {
+    text-align: centered;
     opacity: 1;
     bottom: 50%;
     left: 50%;
     transform: translate(-50%, 50%);
     transition: opacity 0s ease, transform 0s ease;
+    @media (max-width: 575.98px) {
+      text-align: center;
+      width: 80%;
+      left: 10%;
+      transform: translate(0%, 50%);
+    }
   }
   li {
     display: inline-block;
@@ -114,6 +121,9 @@
     //line-height: 1.1;
     &:first-child {
       padding-left: 0rem;
+    }
+    &:last-child {
+      padding-right: 0rem;
     }
     button {
       vertical-align: middle;

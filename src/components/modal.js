@@ -34,6 +34,7 @@ const Modal = ({
   contenu,
   logoGauche,
   logoDroite,
+  logoDroiteSmartphone,
   backUrl,
 }) => {
   const [transition, setTransition] = useState(false)
@@ -72,13 +73,30 @@ const Modal = ({
                       />
                       {logoGauche && <Img fluid={logoGauche} />}
                     </div>
-                    {logoDroite && (
+                    {window.innerWidth > 768 ? (
+                      <>
+                        {logoDroite && (
+                          <div className="logos">
+                            <Img fluid={logoDroite.fluid} />
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {logoDroiteSmartphone && (
+                          <div className="logos">
+                            <Img fluid={logoDroiteSmartphone.fluid} />
+                          </div>
+                        )}
+                      </>
+                    )}
+                    {/* {logoDroite && (
                       <div className="logos">
                         {logoDroite.map(logo => (
                           <Img key={logo.id} fluid={logo.fluid} />
                         ))}
                       </div>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </div>
