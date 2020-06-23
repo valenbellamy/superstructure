@@ -30,6 +30,7 @@ const Slider = ({
   const [windowWidth, setWindowWidth] = useState("")
 
   useEffect(() => {
+    computeWindowWidth
     window.addEventListener("resize", computeWindowWidth)
     return () => {
       window.removeEventListener("resize", computeWindowWidth)
