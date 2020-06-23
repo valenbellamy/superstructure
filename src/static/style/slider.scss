@@ -21,7 +21,7 @@
       align-items: center;
       z-index: 0;
       opacity: 0;
-      transition: opacity 1s linear;
+      transition: opacity 0s linear;
       &.--on {
         z-index: 1;
         opacity: 1;
