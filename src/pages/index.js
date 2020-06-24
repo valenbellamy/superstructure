@@ -148,6 +148,7 @@ const IndexPage = ({ location, data }) => {
           nextColor={nextColor}
           isVisible={visible}
           setHiddenSlider={setHiddenSlider}
+          backUrl={location.pathname}
         />
       )}
 

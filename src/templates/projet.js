@@ -133,6 +133,7 @@ const Projet = ({ location, data, pageContext }) => {
           nextColor={nextColor}
           isVisible={visible}
           setHiddenSlider={setHiddenSlider}
+          backUrl={location.pathname}
         />
       )}
       <Nav

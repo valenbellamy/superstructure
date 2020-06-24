@@ -22,6 +22,7 @@ const Slider = ({
   nextColor,
   isVisible,
   setHiddenSlider,
+  backUrl,
 }) => {
   const limit = slider.length
   const dispatch = useGlobalDispatchContext()
@@ -145,6 +146,7 @@ const Slider = ({
           </div>
           <Link
             to="/contact"
+            state={{ backUrl: backUrl }}
             className={`slider__logo ${isVisible ? "" : "--hidden"}`}
           >
             {width > 575 ? (

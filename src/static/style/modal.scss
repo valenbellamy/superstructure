@@ -60,6 +60,15 @@
       // }
       .content__rich {
         margin: 1rem 0rem;
+        font-family: Toren Mono;
+        font-size: 1.6rem;
+        line-height: 1.4;
+        @media (max-width: 767.98px) {
+          font-size: 1.1rem;
+        }
+        @media (max-width: 575.98px) {
+          font-size: 1.4rem;
+        }
         p {
           margin: 0rem;
         }
@@ -98,10 +107,10 @@
       }
       @media (max-width: 575.98px) {
         position: fixed;
-        left: 15%;
-        bottom: 9rem;
+        left: 5%;
+        bottom: 6rem;
         max-height: 30vh;
-        width: 70%;
+        width: 90%;
       }
     }
     .content {
