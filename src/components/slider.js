@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Video from "./video"
-import { navigate } from "gatsby"
+import { navigate, Link } from "gatsby"
 import ProgressBar from "./progressBar"
 import Logo from "./logo"
 import Logo2 from "./logo2"
@@ -143,13 +143,16 @@ const Slider = ({
           <div className="slider__title" style={{ opacity: isVisible ? 1 : 0 }}>
             <h1 style={{ color: currentColor }}>{titre}</h1>
           </div>
-          <div className={`slider__logo ${isVisible ? "" : "--hidden"}`}>
+          <Link
+            to="/contact"
+            className={`slider__logo ${isVisible ? "" : "--hidden"}`}
+          >
             {width > 575 ? (
               <Logo currentColor={currentColor} />
             ) : (
               <Logo2 currentColor={currentColor} />
             )}
-          </div>
+          </Link>
         </>
       )}
       {slider.length > 1 && (

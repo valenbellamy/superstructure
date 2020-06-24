@@ -13,11 +13,11 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.8);
-    transition: opacity 0.5s;
-    opacity: 0;
-    &.visible {
-      opacity: 1;
-    }
+    // transition: opacity 0.5s;
+    // opacity: 0;
+    // &.--visible {
+    //   opacity: 1;
+    // }
   }
 
   .modal__wrapper {
@@ -50,20 +50,14 @@
       padding: 1.5rem 2rem;
       height: 85vh;
     }
-    // p {
-    //   margin: 0rem;
-    //   font-family: Toren Mono;
-    //   font-size: 1.4rem;
-    //   @media (max-width: 767.98px) {
-    //     font-size: 1.2rem;
-    //   }
-    // }
-    // a {
-    //   text-decoration: underline;
-    // }
     .content {
       width: 60%;
       position: relative;
+      // opacity: 0;
+      // transition: opacity 0.3s;
+      // &.--visible {
+      //   opacity: 1;
+      // }
       .content__rich {
         margin: 1rem 0rem;
         p {
@@ -95,15 +89,19 @@
           max-height: 30vh;
         }
       }
+      @media (max-width: 991.98px) {
+        width: 35%;
+      }
       @media (max-width: 767.98px) {
         margin-left: 0;
+        width: 23%;
       }
       @media (max-width: 575.98px) {
         position: fixed;
-        left: 25%;
-        bottom: 12rem;
+        left: 15%;
+        bottom: 9rem;
         max-height: 30vh;
-        width: 50%;
+        width: 70%;
       }
     }
     .content {
