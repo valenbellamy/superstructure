@@ -13,5 +13,5 @@
   font-style: normal;
   src: url("Toren-Mono.woff") format("woff"),
     url("Toren-Mono.woff2") format("woff2");
-  font-display: fallback;
+  font-display: block;
 }
