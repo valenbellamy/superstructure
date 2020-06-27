@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Img from "gatsby-image"
 import Logo from "./logo"
 import RichContent from "./richContent"
