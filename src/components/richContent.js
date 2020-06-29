@@ -11,7 +11,7 @@ const RichContent = ({ contenu, currentColor }) => {
             href={node.data.uri}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: currentColor }}
+            style={{ color: currentColor, textTransform: "uppercase" }}
             onClick={e => e.stopPropagation()}
           >
             {node.content[0].value}

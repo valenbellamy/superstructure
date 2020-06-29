@@ -51,7 +51,7 @@
       height: 85vh;
     }
     .content {
-      width: 60%;
+      width: 75%;
       position: relative;
       // opacity: 0;
       // transition: opacity 0.3s;
@@ -95,7 +95,7 @@
         //   height: auto !important;
         // }
         @media (max-width: 575.98px) {
-          max-height: 30vh;
+          max-height: 40vh;
         }
       }
       @media (max-width: 991.98px) {
@@ -108,8 +108,8 @@
       @media (max-width: 575.98px) {
         position: fixed;
         left: 5%;
-        bottom: 6rem;
-        max-height: 30vh;
+        bottom: 4rem;
+        max-height: 40vh;
         width: 90%;
       }
     }

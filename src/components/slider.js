@@ -60,7 +60,7 @@ const Slider = ({
   const setCurrentPercentage = value => {
     setPercentage(value)
     if (value === 100) {
-      increment()
+      //increment()
     }
   }
 
@@ -141,19 +141,28 @@ const Slider = ({
       </section>
       {!isShowingModal && (
         <>
-          <div className="slider__title" style={{ opacity: isVisible ? 1 : 0 }}>
+          {/* <div className="slider__title" style={{ opacity: isVisible ? 1 : 0 }}>
             <h1 style={{ color: currentColor }}>{titre}</h1>
-          </div>
+          </div> */}
+          <button
+            type="button"
+            onClick={toggleModal}
+            className="slider__title"
+            style={{ opacity: isVisible ? 1 : 0 }}
+          >
+            <h1 style={{ color: currentColor }}>{titre}</h1>
+          </button>
           <Link
             to="/contact"
             state={{ backUrl: backUrl }}
             className={`slider__logo ${isVisible ? "" : "--hidden"}`}
           >
-            {width > 575 ? (
+            {/* {width > 575 ? (
               <Logo currentColor={currentColor} />
             ) : (
               <Logo2 currentColor={currentColor} />
-            )}
+            )} */}
+            <Logo currentColor={currentColor} />
           </Link>
         </>
       )}
