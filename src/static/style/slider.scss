@@ -56,6 +56,9 @@
   transform: translate(-50%, -50%);
   transition: opacity 0.3s ease;
   cursor: pointer;
+  &:focus {
+    outline: 0;
+  }
 }
 
 .slider__logo {
