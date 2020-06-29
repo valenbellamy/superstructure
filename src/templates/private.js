@@ -38,6 +38,12 @@ export const query = graphql`
             ...GatsbyContentfulFluid_withWebp_noBase64
           }
         }
+        logoDroiteSmartphone {
+          id
+          fluid(quality: 50) {
+            ...GatsbyContentfulFluid_withWebp_noBase64
+          }
+        }
         contenu {
           json
         }
@@ -145,8 +151,9 @@ const Private = ({ location, data, pageContext }) => {
             }
             logoDroiteSmartphone={
               currentIndex === null
-                ? data.contentfulProjetPrive.slider[0].logoDroite
-                : data.contentfulProjetPrive.slider[currentIndex].logoDroite
+                ? data.contentfulProjetPrive.slider[0].logoDroiteSmartphone
+                : data.contentfulProjetPrive.slider[currentIndex]
+                    .logoDroiteSmartphone
             }
             backUrl={location.pathname}
           />
