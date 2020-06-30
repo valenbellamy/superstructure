@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Logo from "../components/logo"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
-const ContactPage = ({ location }) => {
+export const query = graphql`
+  query {
+    contentfulContact {
+      contenuTexte {
+        json
+      }
+    }
+  }
+`
+const ContactPage = ({ location, data }) => {
   const [backUrl, setBackUrl] = useState(null)
   const [active, setActive] = useState(false)
   useEffect(() => {
@@ -32,10 +42,12 @@ const ContactPage = ({ location }) => {
           retour
         </Link>
         <div className="info">
-          <p>
-            Pierre Grimaux et Jean Dathanat<br></br>11 rue Amelot, 75003 Paris -
-            France <br></br>contact@superstructure.tv
-          </p>
+          {/* <p>{data.contentfulContact.contenu.contenu}</p> */}
+          <div className="rich-content">
+            {documentToReactComponents(
+              data.contentfulContact.contenuTexte.json
+            )}
+          </div>
           <p>
             Instagram<br></br>
             <a

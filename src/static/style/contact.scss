@@ -50,7 +50,19 @@
     @media (max-width: 575.98px) {
       margin-bottom: 6rem;
     }
-    > p {
+    .rich-content {
+      margin-bottom: 3rem;
+      @media (max-width: 767.98px) {
+        margin-bottom: 1.5rem;
+      }
+      @media (max-width: 575.98px) {
+        margin-bottom: 2rem;
+      }
+      p {
+        margin-bottom: 0rem;
+      }
+    }
+    p {
       color: black;
       font-family: Toren Mono;
       margin-bottom: 3rem;
