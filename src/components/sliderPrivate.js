@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import VideoPrivate from "./videoPrivate"
-import { navigate } from "gatsby"
+import { navigate, Link } from "gatsby"
 import ProgressBar from "./progressBar"
 import Logo from "./logo"
 
@@ -20,6 +20,7 @@ const SliderPrivate = ({
   nextColor,
   isVisible,
   setHiddenSlider,
+  backUrl,
 }) => {
   const limit = slider.length
   const dispatch = useGlobalDispatchContext()
@@ -126,7 +127,9 @@ const SliderPrivate = ({
               key={slide.id}
             >
               <VideoPrivate
-                source={slide.lienVimeo}
+                source={
+                  slide.video !== null ? slide.video.file.url : slide.lienVimeo
+                }
                 currentSlide={currentIndex}
                 position={i}
                 currentPercentage={setCurrentPercentage}
@@ -148,9 +151,13 @@ const SliderPrivate = ({
           >
             <h1 style={{ color: currentColor }}>{titre}</h1>
           </button>
-          <div className={`slider__logo ${isVisible ? "" : "--hidden"}`}>
+          <Link
+            to="/contact"
+            state={{ backUrl: backUrl }}
+            className={`slider__logo ${isVisible ? "" : "--hidden"}`}
+          >
             <Logo currentColor={currentColor} />
-          </div>
+          </Link>
         </>
       )}
       {slider.length > 1 && (

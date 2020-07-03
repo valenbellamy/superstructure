@@ -29,7 +29,7 @@ const Slider = ({
   const [percentage, setPercentage] = useState(0)
   const [isSwiping, setSwiping] = useState(false)
   const [x, setX] = useState(null)
-  const [width, height] = useWindowSize()
+  //const [width, height] = useWindowSize()
 
   const indexClick = i => {
     changeLocalStorage(i)
@@ -130,7 +130,9 @@ const Slider = ({
               key={slide.id}
             >
               <Video
-                source={slide.video}
+                source={
+                  slide.video !== null ? slide.video.file.url : slide.lienVimeo
+                }
                 currentSlide={currentIndex}
                 position={i}
                 currentPercentage={setCurrentPercentage}

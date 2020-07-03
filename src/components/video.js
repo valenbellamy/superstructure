@@ -40,7 +40,7 @@ const Video = ({ source, currentSlide, position, currentPercentage }) => {
         playsInline
         muted
         ref={videoEl}
-        src={source.file.url}
+        src={source}
         crossOrigin="anonymous"
       >
         {/* <source src={source.file.url} type={source.file.contentType} /> */}

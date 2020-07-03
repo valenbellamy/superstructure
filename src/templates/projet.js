@@ -24,6 +24,7 @@ export const query = graphql`
         id
         titre
         couleur
+        lienVimeo
         video {
           file {
             url

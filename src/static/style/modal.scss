@@ -1,4 +1,5 @@
 .modal {
+  touch-action: manipulation;
   &.--transition {
     .modal__overlay {
       background-color: rgba(255, 255, 255, 1);

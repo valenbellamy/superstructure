@@ -27,6 +27,12 @@ export const query = graphql`
         titre
         couleur
         lienVimeo
+        video {
+          file {
+            url
+            contentType
+          }
+        }
         logoGauche {
           fluid(quality: 50) {
             ...GatsbyContentfulFluid_withWebp_noBase64
@@ -111,6 +117,7 @@ const Private = ({ location, data, pageContext }) => {
               nextColor={nextColor}
               isVisible={visible}
               setHiddenSlider={setHiddenSlider}
+              backUrl={location.pathname}
             />
           )}
           <Nav
