@@ -31,11 +31,6 @@ export const query = graphql`
             contentType
           }
         }
-        logo {
-          fluid(quality: 50) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
-        }
         logoGauche {
           fluid(quality: 50) {
             ...GatsbyContentfulFluid_withWebp_noBase64
