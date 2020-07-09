@@ -94,6 +94,23 @@ const Projet = ({ location, data, pageContext }) => {
 
   const { prevSlug, nextSlug, prevColor, nextColor } = pageContext
 
+  const setLogoGauche = () => {
+    console.log(data.contentfulProjet.slider[0].logoGauche !== null)
+    if (currentIndex === null) {
+      if (data.contentfulProjet.slider[0].logoGauche !== null) {
+        return data.contentfulProjet.slider[0].logoGauche.fluid
+      } else {
+        return null
+      }
+    } else {
+      if (data.contentfulProjet.slider[currentIndex].logoGauche !== null) {
+        return data.contentfulProjet.slider[currentIndex].logoGauche.fluid
+      } else {
+        return null
+      }
+    }
+  }
+
   return (
     <Layout>
       <SEO title="Projet" />
@@ -147,9 +164,10 @@ const Projet = ({ location, data, pageContext }) => {
             : data.contentfulProjet.slider[currentIndex].contenu
         }
         logoGauche={
-          currentIndex === null
-            ? data.contentfulProjet.slider[0].logoGauche.fluid
-            : data.contentfulProjet.slider[currentIndex].logoGauche.fluid
+          setLogoGauche()
+          // currentIndex === null
+          //   ? data.contentfulProjet.slider[0].logoGauche.fluid
+          //   : data.contentfulProjet.slider[currentIndex].logoGauche.fluid
         }
         logoDroite={
           currentIndex === null

@@ -91,6 +91,23 @@ const Private = ({ location, data, pageContext }) => {
     }
   }, [])
 
+  const setLogoGauche = () => {
+    console.log(data.contentfulProjetPrive.slider[0].logoGauche !== null)
+    if (currentIndex === null) {
+      if (data.contentfulProjetPrive.slider[0].logoGauche !== null) {
+        return data.contentfulProjetPrive.slider[0].logoGauche.fluid
+      } else {
+        return null
+      }
+    } else {
+      if (data.contentfulProjetPrive.slider[currentIndex].logoGauche !== null) {
+        return data.contentfulProjetPrive.slider[currentIndex].logoGauche.fluid
+      } else {
+        return null
+      }
+    }
+  }
+
   return (
     <Layout>
       <SEO title="Projet" />
@@ -146,10 +163,11 @@ const Private = ({ location, data, pageContext }) => {
                 : data.contentfulProjetPrive.slider[currentIndex].contenu
             }
             logoGauche={
-              currentIndex === null
-                ? data.contentfulProjetPrive.slider[0].logoGauche.fluid
-                : data.contentfulProjetPrive.slider[currentIndex].logoGauche
-                    .fluid
+              setLogoGauche()
+              // currentIndex === null
+              //   ? data.contentfulProjetPrive.slider[0].logoGauche.fluid
+              //   : data.contentfulProjetPrive.slider[currentIndex].logoGauche
+              //       .fluid
             }
             logoDroite={
               currentIndex === null
