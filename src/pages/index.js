@@ -30,11 +30,6 @@ export const query = graphql`
             contentType
           }
         }
-        logo {
-          fluid(quality: 50) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
-        }
         logoGauche {
           fluid(quality: 50) {
             ...GatsbyContentfulFluid_withWebp_noBase64
@@ -107,6 +102,23 @@ const IndexPage = ({ location, data }) => {
     data.allContentfulProjet.edges[0].node.slug === ""
       ? ""
       : `/projet/${data.allContentfulProjet.edges[0].node.slug}`
+
+  // const setLogoGauche = () => {
+  //   console.log(data.contentfulProjet.slider[0].logoGauche !== null)
+  //   if (currentIndex === null) {
+  //     if (data.contentfulProjet.slider[0].logoGauche !== null) {
+  //       return data.contentfulProjet.slider[0].logoGauche.fluid
+  //     } else {
+  //       return null
+  //     }
+  //   } else {
+  //     if (data.contentfulProjet.slider[currentIndex].logoGauche !== null) {
+  //       return data.contentfulProjet.slider[currentIndex].logoGauche.fluid
+  //     } else {
+  //       return null
+  //     }
+  //   }
+  // }
 
   return (
     <Layout>
