@@ -103,22 +103,22 @@ const IndexPage = ({ location, data }) => {
       ? ""
       : `/projet/${data.allContentfulProjet.edges[0].node.slug}`
 
-  // const setLogoGauche = () => {
-  //   console.log(data.contentfulProjet.slider[0].logoGauche !== null)
-  //   if (currentIndex === null) {
-  //     if (data.contentfulProjet.slider[0].logoGauche !== null) {
-  //       return data.contentfulProjet.slider[0].logoGauche.fluid
-  //     } else {
-  //       return null
-  //     }
-  //   } else {
-  //     if (data.contentfulProjet.slider[currentIndex].logoGauche !== null) {
-  //       return data.contentfulProjet.slider[currentIndex].logoGauche.fluid
-  //     } else {
-  //       return null
-  //     }
-  //   }
-  // }
+  const setLogoGauche = () => {
+    console.log(data.contentfulProjet.slider[0].logoGauche !== null)
+    if (currentIndex === null) {
+      if (data.contentfulProjet.slider[0].logoGauche !== null) {
+        return data.contentfulProjet.slider[0].logoGauche.fluid
+      } else {
+        return null
+      }
+    } else {
+      if (data.contentfulProjet.slider[currentIndex].logoGauche !== null) {
+        return data.contentfulProjet.slider[currentIndex].logoGauche.fluid
+      } else {
+        return null
+      }
+    }
+  }
 
   return (
     <Layout>
@@ -174,9 +174,10 @@ const IndexPage = ({ location, data }) => {
             : data.contentfulProjet.slider[currentIndex].contenu
         }
         logoGauche={
-          currentIndex === null
-            ? data.contentfulProjet.slider[0].logoGauche.fluid
-            : data.contentfulProjet.slider[currentIndex].logoGauche.fluid
+          setLogoGauche()
+          // currentIndex === null
+          //   ? data.contentfulProjet.slider[0].logoGauche.fluid
+          //   : data.contentfulProjet.slider[currentIndex].logoGauche.fluid
         }
         logoDroite={
           currentIndex === null
