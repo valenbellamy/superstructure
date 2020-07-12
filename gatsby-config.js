@@ -7,6 +7,7 @@ module.exports = {
     title: `Superstructure`,
     description: `Superstructure`,
     author: `@gatsbyjs`,
+    siteUrl: `https://superstructure.netlify.app/`,
   },
   plugins: [
     "gatsby-plugin-sass",
@@ -39,6 +40,16 @@ module.exports = {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         // Learn about environment variables: https://gatsby.dev/env-vars
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/sitemap.xml`,
+        // Exclude specific pages or groups of pages using glob parameters
+        // See: https://github.com/isaacs/minimatch
+        // The example below will exclude the single `path/to/page` and all routes beginning with `category`
+        exclude: [`/prive/*`, "/prive"],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

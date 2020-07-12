@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
@@ -72,7 +72,6 @@ const IndexPage = ({ location, data }) => {
   const { isShowing, toggle } = useModal()
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
-  //const [visible, setVisible] = useState(false)
   const visible = useMouseMove(false)
   const [hiddenSlider, setHiddenSlider] = useState(false)
 
@@ -103,8 +102,7 @@ const IndexPage = ({ location, data }) => {
       ? ""
       : `/projet/${data.allContentfulProjet.edges[0].node.slug}`
 
-  const setLogoGauche = () => {
-    console.log(data.contentfulProjet.slider[0].logoGauche !== null)
+  const setLogoGauche = useCallback(() => {
     if (currentIndex === null) {
       if (data.contentfulProjet.slider[0].logoGauche !== null) {
         return data.contentfulProjet.slider[0].logoGauche.fluid
@@ -118,7 +116,7 @@ const IndexPage = ({ location, data }) => {
         return null
       }
     }
-  }
+  }, [currentIndex])
 
   return (
     <Layout>
@@ -173,12 +171,7 @@ const IndexPage = ({ location, data }) => {
             ? data.contentfulProjet.slider[0].contenu
             : data.contentfulProjet.slider[currentIndex].contenu
         }
-        logoGauche={
-          setLogoGauche()
-          // currentIndex === null
-          //   ? data.contentfulProjet.slider[0].logoGauche.fluid
-          //   : data.contentfulProjet.slider[currentIndex].logoGauche.fluid
-        }
+        logoGauche={setLogoGauche()}
         logoDroite={
           currentIndex === null
             ? data.contentfulProjet.slider[0].logoDroite

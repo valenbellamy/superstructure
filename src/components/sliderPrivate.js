@@ -140,9 +140,6 @@ const SliderPrivate = ({
       </section>
       {!isShowingModal && (
         <>
-          {/* <div className="slider__title" style={{ opacity: isVisible ? 1 : 0 }}>
-            <h1 style={{ color: currentColor }}>{titre}</h1>
-          </div> */}
           <button
             type="button"
             onClick={toggleModal}

@@ -29,7 +29,6 @@ const Slider = ({
   const [percentage, setPercentage] = useState(0)
   const [isSwiping, setSwiping] = useState(false)
   const [x, setX] = useState(null)
-  //const [width, height] = useWindowSize()
 
   const indexClick = i => {
     changeLocalStorage(i)
@@ -143,9 +142,6 @@ const Slider = ({
       </section>
       {!isShowingModal && (
         <>
-          {/* <div className="slider__title" style={{ opacity: isVisible ? 1 : 0 }}>
-            <h1 style={{ color: currentColor }}>{titre}</h1>
-          </div> */}
           <button
             type="button"
             onClick={toggleModal}
@@ -159,11 +155,6 @@ const Slider = ({
             state={{ backUrl: backUrl }}
             className={`slider__logo ${isVisible ? "" : "--hidden"}`}
           >
-            {/* {width > 575 ? (
-              <Logo currentColor={currentColor} />
-            ) : (
-              <Logo2 currentColor={currentColor} />
-            )} */}
             <Logo currentColor={currentColor} />
           </Link>
         </>

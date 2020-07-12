@@ -42,25 +42,7 @@ const Video = ({ source, currentSlide, position, currentPercentage }) => {
         ref={videoEl}
         src={source}
         crossOrigin="anonymous"
-      >
-        {/* <source src={source.file.url} type={source.file.contentType} /> */}
-      </video>
-      {/* <video
-        playsInline
-        //loop
-        muted
-        //preload="auto"
-        // poster={poster ? poster.file.url : placeholder}
-        ref={videoEl}
-      >
-        <source src={require(`../assets/video/${source}`)} type="video/mp4" />
-        {system === "iOS" || browser === "Safari" ? (
-          <source src={videoMp4.file.url} type={videoMp4.file.contentType} />
-        ) : (
-          <source src={videoWebm.file.url} type={videoWebm.file.contentType} />
-        )} 
-        <p>Sorry, the video can't be displayed with your browser.</p>
-      </video> */}
+      ></video>
     </>
   )
 }

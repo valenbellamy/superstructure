@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { graphql, navigate } from "gatsby"
 
 import { isLoggedIn } from "../services/auth"
@@ -62,7 +62,6 @@ const Private = ({ location, data, pageContext }) => {
   const { isShowing, toggle } = useModal()
   const { currentColor, currentIndex } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
-  //const [visible, setVisible] = useState(true)
   const visible = useMouseMove(true)
   const [hiddenSlider, setHiddenSlider] = useState(false)
   const [logged, setLogged] = useState(false)
@@ -91,8 +90,7 @@ const Private = ({ location, data, pageContext }) => {
     }
   }, [])
 
-  const setLogoGauche = () => {
-    console.log(data.contentfulProjetPrive.slider[0].logoGauche !== null)
+  const setLogoGauche = useCallback(() => {
     if (currentIndex === null) {
       if (data.contentfulProjetPrive.slider[0].logoGauche !== null) {
         return data.contentfulProjetPrive.slider[0].logoGauche.fluid
@@ -106,7 +104,7 @@ const Private = ({ location, data, pageContext }) => {
         return null
       }
     }
-  }
+  }, [currentIndex])
 
   return (
     <Layout>
@@ -162,13 +160,7 @@ const Private = ({ location, data, pageContext }) => {
                 ? data.contentfulProjetPrive.slider[0].contenu
                 : data.contentfulProjetPrive.slider[currentIndex].contenu
             }
-            logoGauche={
-              setLogoGauche()
-              // currentIndex === null
-              //   ? data.contentfulProjetPrive.slider[0].logoGauche.fluid
-              //   : data.contentfulProjetPrive.slider[currentIndex].logoGauche
-              //       .fluid
-            }
+            logoGauche={setLogoGauche()}
             logoDroite={
               currentIndex === null
                 ? data.contentfulProjetPrive.slider[0].logoDroite

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
@@ -89,8 +89,7 @@ const Projet = ({ location, data, pageContext }) => {
 
   const { prevSlug, nextSlug, prevColor, nextColor } = pageContext
 
-  const setLogoGauche = () => {
-    console.log(data.contentfulProjet.slider[0].logoGauche !== null)
+  const setLogoGauche = useCallback(() => {
     if (currentIndex === null) {
       if (data.contentfulProjet.slider[0].logoGauche !== null) {
         return data.contentfulProjet.slider[0].logoGauche.fluid
@@ -104,7 +103,7 @@ const Projet = ({ location, data, pageContext }) => {
         return null
       }
     }
-  }
+  }, [currentIndex])
 
   return (
     <Layout>
@@ -158,12 +157,7 @@ const Projet = ({ location, data, pageContext }) => {
             ? data.contentfulProjet.slider[0].contenu
             : data.contentfulProjet.slider[currentIndex].contenu
         }
-        logoGauche={
-          setLogoGauche()
-          // currentIndex === null
-          //   ? data.contentfulProjet.slider[0].logoGauche.fluid
-          //   : data.contentfulProjet.slider[currentIndex].logoGauche.fluid
-        }
+        logoGauche={setLogoGauche()}
         logoDroite={
           currentIndex === null
             ? data.contentfulProjet.slider[0].logoDroite
