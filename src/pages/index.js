@@ -120,7 +120,7 @@ const IndexPage = ({ location, data }) => {
 
   return (
     <Layout>
-      <SEO title="Accueil" />
+      <SEO title="Superstructure" />
       <Header
         isShowingModal={isShowing}
         toggleModal={toggle}
