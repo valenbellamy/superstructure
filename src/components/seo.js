@@ -21,11 +21,19 @@ function SEO({ description, lang, meta, title }) {
             author
           }
         }
+        contentfulSocialMediaCover(titre: { eq: "affiche" }) {
+          image {
+            fixed(width: 600) {
+              src
+            }
+          }
+        }
       }
     `
   )
 
   const metaDescription = description || site.siteMetadata.description
+  const ogImage = contentfulSocialMediaCover.image.fixed.src
 
   return (
     <Helmet
@@ -48,6 +56,10 @@ function SEO({ description, lang, meta, title }) {
           content: metaDescription,
         },
         {
+          property: "og:image",
+          content: ogImage,
+        },
+        {
           property: `og:type`,
           content: `website`,
         },
@@ -66,6 +78,10 @@ function SEO({ description, lang, meta, title }) {
         {
           name: `twitter:description`,
           content: metaDescription,
+        },
+        {
+          name: "twitter:image",
+          content: ogImage,
         },
       ].concat(meta)}
     />

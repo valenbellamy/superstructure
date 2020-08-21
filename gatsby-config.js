@@ -6,7 +6,7 @@ module.exports = {
   siteMetadata: {
     title: `Superstructure`,
     description: `superstructure est une société de production réalisant des films & séries, fiction & documentaire`,
-    author: `@gatsbyjs`,
+    author: `@BellamyValentin`,
     siteUrl: `https://superstructure.tv/`,
   },
   plugins: [
