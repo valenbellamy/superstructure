@@ -21,19 +21,12 @@ function SEO({ description, lang, meta, title }) {
             author
           }
         }
-        contentfulSocialMediaCover(titre: { eq: "affiche" }) {
-          image {
-            fixed(width: 600) {
-              src
-            }
-          }
-        }
       }
     `
   )
 
   const metaDescription = description || site.siteMetadata.description
-  const ogImage = contentfulSocialMediaCover.image.fixed.src
+  //const ogImage = site.imgSEO.fixed.src
 
   return (
     <Helmet
@@ -57,7 +50,8 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: "og:image",
-          content: ogImage,
+          content:
+            "https://images.ctfassets.net/976ngh7rb5au/1JiLz8ZTzd61l6xrNaALWR/1e168d6809fb987d35a7798bfce498b7/TuPrefere_Affiche_HD2_1__1_.jpg",
         },
         {
           property: `og:type`,
@@ -81,7 +75,8 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: "twitter:image",
-          content: ogImage,
+          content:
+            "https://images.ctfassets.net/976ngh7rb5au/1JiLz8ZTzd61l6xrNaALWR/1e168d6809fb987d35a7798bfce498b7/TuPrefere_Affiche_HD2_1__1_.jpg",
         },
       ].concat(meta)}
     />
