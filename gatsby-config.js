@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `Superstructure`,
-    description: `Superstructure`,
+    description: `superstructure est une société de production réalisant des films & séries, fiction & documentaire`,
     author: `@gatsbyjs`,
     siteUrl: `https://superstructure.tv/`,
   },

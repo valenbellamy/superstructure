@@ -20,6 +20,7 @@ export const query = graphql`
   query($slug: String!) {
     contentfulProjet(slug: { eq: $slug }) {
       titre
+      descriptionSeo
       slider {
         id
         titre
@@ -107,7 +108,10 @@ const Projet = ({ location, data, pageContext }) => {
 
   return (
     <Layout>
-      <SEO title="Projet" />
+      <SEO
+        title={data.contentfulProjet.titre}
+        description={data.contentfulProjet.descriptionSeo}
+      />
       <Header
         isShowingModal={isShowing}
         toggleModal={toggle}
